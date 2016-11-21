@@ -26,9 +26,9 @@ Pourquoi avoir choisi JavaFX ?
 - Les OS cibles possibles sont Windows, MAC; Linux, ARM (raspberry pi par exemple)
 
 Fonctionnement de Trello :
--Bac à sable : dans celui-ci, on est censé contenir l'ensemble des fonctionnalités (par exemple cartes terrains).
--Bac de culture : il est censé contenir les détails des fonctionnalités (par exemple une carte terrain contient des ressources).
--Bac de départ ne concerne que le PO : il doit contenir les fiches auxquelles des modifications auraient été apportées.
--Le PO déplace ensuite certaines fiches dans 'To Do' (une répartition sera faite).
--Quand vous prenez une fiche, vous la déplacez dans 'En cours' et une fois terminée vous la déplacez dans 'Done'.
--Ensuite le PO vérifie le respect des consignes de la fiche et si elle est validée elle est placée dans le bac de récolte, sinon elle est placée dans bac de mauvaise récolte et il faut qu'elle reparte dans ToDo au plus vite et est à faire en priorité.
+- Bac à sable : dans celui-ci, on est censé contenir l'ensemble des fonctionnalités (par exemple cartes terrains).
+- Bac de culture : il est censé contenir les détails des fonctionnalités (par exemple une carte terrain contient des ressources).
+- Bac de départ ne concerne que le PO : il doit contenir les fiches auxquelles des modifications auraient été apportées.
+- Le PO déplace ensuite certaines fiches dans 'To Do' (une répartition sera faite).
+- Quand vous prenez une fiche, vous la déplacez dans 'En cours' et une fois terminée vous la déplacez dans 'Done'.
+- Ensuite le PO vérifie le respect des consignes de la fiche et si elle est validée elle est placée dans le bac de récolte, sinon elle est placée dans bac de mauvaise récolte et il faut qu'elle reparte dans ToDo au plus vite et est à faire en priorité.
