@@ -1,2 +1,3 @@
 # Les-princes-de-Catane
-Ce message ne contient pas de contenu texte
+
+Lien vers Trello : https://trello.com/b/0f1oRtlF/les-princes-de-catane
