@@ -10,7 +10,24 @@ public class Terrain extends Carte {
 
     public Terrain(String dos, String ressource, int nbRessource){
         super(dos);
+        this.setRessource(ressource);
+        this.setNbRessource(nbRessource);
+    }
+
+
+    public String getRessource() {
+        return ressource;
+    }
+
+    public void setRessource(String ressource) {
         this.ressource = ressource;
+    }
+
+    public int getNbRessource() {
+        return nbRessource;
+    }
+
+    public void setNbRessource(int nbRessource) {
         this.nbRessource = nbRessource;
     }
 }
