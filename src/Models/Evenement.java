@@ -5,7 +5,7 @@ package Models;
  */
 public class Evenement extends Carte{
 
-    protected String event; //événement...
+    private String event; //événement...
 
     public Evenement(String dos, String event){
         super(dos);

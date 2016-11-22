@@ -6,7 +6,7 @@ package Models;
 
 public class Carte {
 
-    protected String dos;//bouclier rouge, bouclier noir, carte terrain, carte route, etc.
+    private String dos;//bouclier rouge, bouclier noir, carte terrain, carte route, etc.
 
     public Carte(String dos){
         this.dos = dos;
