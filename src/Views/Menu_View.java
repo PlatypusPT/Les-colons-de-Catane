@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.metal.MetalBorders;
 import java.awt.*;
+import java.awt.event.MouseListener;
 
 /**
  * Created by yhaffner on 21/11/16.
@@ -24,8 +25,8 @@ public class Menu_View extends JFrame{
     private Model model;
     private ThemedPanel fenetre;
     private JPanel menuSection;
-    private JPanel startButton;
-    private JPanel optionButton;
+    public JPanel startButton;
+    public JPanel optionButton;
 
     public Menu_View(Model model) {
         this.model = model;
@@ -94,7 +95,8 @@ public class Menu_View extends JFrame{
         fenetre.setVisible(true);
     }
 
-    public void setController(Control_Menu control_menu) {
-        /* Completer */
+    public void setController(MouseListener control_menu) {
+        startButton.addMouseListener(control_menu);
+        optionButton.addMouseListener(control_menu);
     }
 }
