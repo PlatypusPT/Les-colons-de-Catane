@@ -3,6 +3,7 @@ package Models;
 /**
  * Created by alex on 21/11/16.
  */
+
 public class Colonie extends Carte {
 
     protected Carte Ressources[]; //Ressources sur les diago de la colonie

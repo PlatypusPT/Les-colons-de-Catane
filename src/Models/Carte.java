@@ -11,4 +11,12 @@ public class Carte {
     public Carte(String dos){
         this.dos = dos;
     }
+
+    public void setDos(String dos){
+        this.dos = dos;
+    }
+
+    public String getDos(){
+        return dos;
+    }
 }

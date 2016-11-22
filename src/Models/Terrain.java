@@ -5,12 +5,28 @@ package Models;
  */
 public class Terrain extends Carte {
 
-    protected String ressource; //ressource correspondante
+    private String ressource; //ressource correspondante
     protected int nbRessource; //quantité de ressource dispo (0, 1, 2 ou 3)
 
     public Terrain(String dos, String ressource, int nbRessource){
         super(dos);
         this.ressource = ressource;
         this.nbRessource = nbRessource;
+    }
+
+    public void setNbRessource(int nbRessource){
+        this.nbRessource = nbRessource;
+    }
+
+    public int getNbRessource(){
+        return nbRessource;
+    }
+
+    public String getRessource() {
+        return ressource;
+    }
+
+    public void setRessource(String ressource) {
+        this.ressource = ressource;
     }
 }
