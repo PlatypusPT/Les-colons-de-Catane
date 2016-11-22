@@ -8,9 +8,8 @@ import org.junit.*;
 public class ModelDeTest {
     @Test
     public void testDeComprisEntreUnEtSix() {
-        ModelDe md = new ModelDe();
         for (int i=0;i<100;i++) {
-            int de = md.lanceDe();
+            int de = ModelDe.lanceDe();
             Assert.assertTrue(de <= 6 && de >= 1);
         }
     }
@@ -19,8 +18,8 @@ public class ModelDeTest {
     public void testActionNonVide() {
         ModelDe md = new ModelDe();
         for (int i=0;i<100;i++) {
-            String action = md.getAction();
-            Assert.assertTrue(action != "");
+            String action = ModelDe.getAction();
+            Assert.assertTrue(!action.equals(""));
         }
     }
 }
