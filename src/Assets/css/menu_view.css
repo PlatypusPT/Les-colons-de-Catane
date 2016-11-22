@@ -1,0 +1,24 @@
+#start-button,#option-button{
+    -fx-text-fill: rgb(245,204,34);
+    -fx-font: bold 28px Gentium;
+    -fx-background-color: rgb(148,34,44);
+    -fx-text-align: center;
+    -fx-pref-width: 12em;
+}
+#start-button:hover,#option-button:hover{
+    -fx-background-color: rgb(132,28,32);
+}
+
+.menu-section{
+    -fx-padding: 1em;
+    -fx-alignment: center;
+    -fx-background-color: black;
+    -fx-spacing: 1em;
+    -fx-max-width: 26em;
+    -fx-max-height: 10em;
+}
+
+.body {
+    -fx-alignment: center;
+    -fx-background-image: url('../img/menu.jpg');
+}
