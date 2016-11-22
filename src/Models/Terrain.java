@@ -3,7 +3,7 @@ package Models;
 /**
  * Created by alex on 21/11/16.
  */
-class Terrain extends Carte {
+public class Terrain extends Carte {
 
     private String ressource; //ressource correspondante
     private int nbRessource; //quantité de ressource dispo (0, 1, 2 ou 3)
