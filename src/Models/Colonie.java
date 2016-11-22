@@ -5,9 +5,9 @@ package Models;
  */
 public class Colonie extends Carte {
 
-    protected Carte Ressources[]; //Ressources sur les diago de la colonie
-    protected Route rte1;
-    protected Route rte2;//rte1 & rte2 sont les routes qui partent de this colonie
+    private Carte Ressources[]; //Ressources sur les diago de la colonie
+    private Route rte1;
+    private Route rte2;//rte1 & rte2 sont les routes qui partent de this colonie
 
     public Colonie(String dos, Route rte1, Route rte2){
         super(dos);
