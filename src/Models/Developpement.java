@@ -1,6 +1,5 @@
 package Models;
 
-
 public class Developpement extends Carte {
 
 	private String type; //type de la carte : action, dev colonie ou dev ville
