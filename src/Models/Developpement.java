@@ -1,19 +1,14 @@
 package Models;
 
-public class Developpement extends Carte {
+/**
+ * Created by alex on 30/11/16.
+ */
 
-	private String type; //type de la carte : action, dev colonie ou dev ville
+abstract public class Developpement extends Carte {
 
-	public Developpement(String dos, String type) {
-		super(dos);
-		this.type = type;
+	public Developpement(int nbPointsVictoire, int nbPointsCommerce) {
+		super(nbPointsVictoire, nbPointsCommerce);
 	}
 
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getType() {
-		return type;
-	}
+	abstract public void actionDeveloppement();
 }

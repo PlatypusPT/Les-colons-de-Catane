@@ -4,11 +4,12 @@ package Models;
  * Created by alex on 21/11/16.
  */
 
-public class Colonie extends Carte {
+public class Colonie extends Fondation {
 
     private Carte Ressources[]; //Ressources sur les diago de la colonie
     private Route rte1;
     private Route rte2;//rte1 & rte2 sont les routes qui partent de this colonie
+    private int NBPOINT = 1;//une colonie rapporte 1 pv
 
     public Colonie(String dos, Route rte1, Route rte2){
         super(dos);

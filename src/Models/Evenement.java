@@ -3,12 +3,12 @@ package Models;
 /**
  * Created by alex on 21/11/16.
  */
-public class Evenement extends Carte{
 
-    private String event; //événement...
+abstract public class Evenement extends Carte{
 
-    public Evenement(String dos, String event){
-        super(dos);
-        this.event = event;
+    public Evenement(int nbPointsVictoire, int nbPointsCommerce, int id){
+        super(nbPointsVictoire, nbPointsCommerce);
     }
+
+    abstract public void actionEvent();
 }

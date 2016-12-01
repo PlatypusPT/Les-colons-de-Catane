@@ -4,19 +4,13 @@ package Models;
  * Created by alex on 21/11/16.
  */
 
-public abstract class Carte {
+abstract public class Carte {
 
-    private String dos;//bouclier rouge, bouclier noir, carte terrain, carte route, etc.
+    protected int nbPointsVictoire; //nb de points de victoire que rapporte this carte
+    protected int nbPointsCommerce; //nb de points de commerce que rapporte this carte
 
-    public Carte(String dos){
-        this.dos = dos;
-    }
-
-    public void setDos(String dos){
-        this.dos = dos;
-    }
-
-    public String getDos(){
-        return dos;
+    public Carte(int nbPointsVictoire, int nbPointsCommerce){
+        this.nbPointsVictoire = nbPointsVictoire;
+        this.nbPointsCommerce = nbPointsCommerce;
     }
 }
