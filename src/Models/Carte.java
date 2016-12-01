@@ -13,4 +13,20 @@ abstract public class Carte {
         this.nbPointsVictoire = nbPointsVictoire;
         this.nbPointsCommerce = nbPointsCommerce;
     }
+
+    public int getNbPointsVictoire(){
+        return nbPointsVictoire;
+    }
+
+    public void setNbPointsVictoire(int nbPointsVictoire){
+        this.nbPointsVictoire = nbPointsVictoire;
+    }
+
+    public int getNbPointsCommerce(){
+        return nbPointsCommerce;
+    }
+
+    public void setNbPointsCommerce(int nbPointsCommerce){
+        this.nbPointsCommerce = nbPointsCommerce;
+    }
 }

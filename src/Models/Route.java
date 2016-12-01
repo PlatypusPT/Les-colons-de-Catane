@@ -6,7 +6,13 @@ package Models;
 
 public class Route extends Fondation{
 
-    public Route(String dos){
-        super(dos);
+    public Route(int nbPointsVictoire, int nbPointsCommerce){
+        super(nbPointsVictoire, nbPointsCommerce);
+    }
+
+    public void debitRessources(){
+        /*
+        code de la methode...
+         */
     }
 }

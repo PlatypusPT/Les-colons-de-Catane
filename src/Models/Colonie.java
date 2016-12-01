@@ -6,20 +6,17 @@ package Models;
 
 public class Colonie extends Fondation {
 
-    private Carte Ressources[]; //Ressources sur les diago de la colonie
+    private Terrain terrains[]; //terrains sur les diagonales de la colonie
+    private DeveloppementColonie batiments[];
     private Route rte1;
     private Route rte2;//rte1 & rte2 sont les routes qui partent de this colonie
-    private int NBPOINT = 1;//une colonie rapporte 1 pv
 
-    public Colonie(String dos, Route rte1, Route rte2){
-        super(dos);
-        Ressources = new Carte[4];
-        this.rte1 = rte1;
-        this.rte2 = rte2;
-    }
-
-    public Colonie(String dos){
-        super(dos);
+    public Colonie(int nbPointsCommerce){
+        super(1, 0);
+        terrains = new Terrain[4];
+        batiments = new DeveloppementColonie[2];
+        this.rte1 = null;
+        this.rte2 = null;
     }
 
     public void setRte1(Route rte1){
@@ -30,9 +27,9 @@ public class Colonie extends Fondation {
         this.rte2 = rte2;
     }
 
-    public void setRoute(Route r1, Route r2){
-        rte1 = r1;
-        rte2 = r2;
+    public void setRoute(Route rte1, Route rte2){
+        this.rte1 = rte1;
+        this.rte2 = rte2;
     }
 
     public Route getRte1(){
@@ -41,5 +38,27 @@ public class Colonie extends Fondation {
 
     public Route getRte2(){
         return rte2;
+    }
+
+    public void debitRessources(){
+        /*
+        code de la methode...
+         */
+    }
+
+    public void setTerrains(int index, Terrain terrain){
+        terrains[index] = terrain;
+    }
+
+    public void setBatiments(int index, DeveloppementColonie developpementColonie){
+        batiments[index] = developpementColonie;
+    }
+
+    public Terrain[] getTerrains(){
+        return terrains;
+    }
+
+    public DeveloppementColonie[] getBatiments(){
+        return batiments;
     }
 }

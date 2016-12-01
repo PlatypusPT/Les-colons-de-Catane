@@ -6,13 +6,34 @@ package Models;
 
 public class Ville extends Fondation{
 
-    protected Colonie col; //colonie à partir de laquelle on construit la ville
-    protected Carte Batiments[]; //différents bâtiments de la ville
-    private int NBPOINT = 2;//une ville rapporte 2 pv
+    private Colonie colonie; //colonie à partir de laquelle on construit this ville
+    private DeveloppementVille Batiments[]; //différents bâtiments de la ville
 
-    public Ville(String dos, Colonie col){
-        super(dos);
-        this.col = col;
-        Batiments = new Carte[4];
+    public Ville(){
+        super(2, 0);
+        this.colonie = null;
+        Batiments = new DeveloppementVille[4];
+    }
+
+    public void setColonie(Colonie colonie){
+        this.colonie = colonie;
+    }
+
+    public Colonie getColonie(){
+        return colonie;
+    }
+
+    public void debitRessources(){
+        /*
+        code de la methode...
+         */
+    }
+
+    public void setBatiments(int index, DeveloppementVille developpementVille){
+        Batiments[index] = developpementVille;
+    }
+
+    public DeveloppementVille[] getBatiments(){
+        return Batiments;
     }
 }

@@ -9,6 +9,4 @@ abstract public class Developpement extends Carte {
 	public Developpement(int nbPointsVictoire, int nbPointsCommerce) {
 		super(nbPointsVictoire, nbPointsCommerce);
 	}
-
-	abstract public void actionDeveloppement();
 }

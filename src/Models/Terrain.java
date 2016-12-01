@@ -9,21 +9,25 @@ public class Terrain extends Fondation {
     private String ressource; //ressource correspondante
     private int nbRessource; //quantité de ressource dispo (0, 1, 2 ou 3)
     private int faceDé; //face du dé qui doit sortir pour incrémenter le nombre de ressource
+    private boolean isInfluenceParBatimentProduUp; //this terrain est-il sous l'influence d'un ProductionUp ?
+    private boolean isFlotteCommerce; //y'a-t-il une flotte de commerce pour this terrain.ressource ?
+    private boolean isProtege; //this terrain est-il sous la protection d'un camp fortifie ?
+    private boolean yaUnBain;
 
-    public Terrain(String dos, String ressource, int nbRessource, int faceDé){
-        super(dos);
-        this.setRessource(ressource);
+    public Terrain(int nbPointsVictoire, int nbPointsCommerce, String ressource, int nbRessource, int faceDé){
+        super(nbPointsVictoire, nbPointsCommerce);
+        this.ressource = ressource;
         this.setNbRessource(nbRessource);
         this.faceDé = faceDé;
+        isFlotteCommerce = false;
+        isInfluenceParBatimentProduUp = false;
+        isProtege = false;
+        yaUnBain = false;
     }
 
 
     public String getRessource() {
         return ressource;
-    }
-
-    public void setRessource(String ressource) {
-        this.ressource = ressource;
     }
 
     public int getNbRessource() {
@@ -38,7 +42,41 @@ public class Terrain extends Fondation {
         return faceDé;
     }
 
-    public void setFaceDé(int faceDé) {
-        this.faceDé = faceDé;
+    public void debitRessources(){
+        /*
+        code de la methode...
+         */
+    }
+
+    public boolean batimentProdOuPas(){
+        return isInfluenceParBatimentProduUp;
+    }
+
+    public void doublerProduction(){
+        isInfluenceParBatimentProduUp = true;
+    }
+
+    public boolean yaUneFlotteOuPas(){
+        return isFlotteCommerce;
+    }
+
+    public void mettreUneFlotteCommerce(){
+        isFlotteCommerce = true;
+    }
+
+    public boolean estIlProtegeOuPas(){
+        return isProtege;
+    }
+
+    public void proteger(){
+        isProtege = true;
+    }
+
+    public boolean yaUnBainOuPas(){
+        return yaUnBain;
+    }
+
+    public void ajouterBain(){
+        yaUnBain = true;
     }
 }
