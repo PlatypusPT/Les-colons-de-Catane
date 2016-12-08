@@ -7,7 +7,7 @@ package Models;
 abstract public class Action extends Developpement {
 
     public Action(int nbPointsVictoire, int nbPointsCommerce) {
-        super(nbPointsVictoire, nbPointsCommerce);
+        super(0, 0);
     }
 
     abstract public void ceQueDoitFaireLaCarte();

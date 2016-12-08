@@ -6,8 +6,8 @@ package Models;
 
 public class Epidemie extends Evenement {
 
-    public Epidemie(int nbPointsVictoire, int nbPointsCommerce){
-        super(nbPointsVictoire, nbPointsCommerce);
+    public Epidemie(){
+        super(0, 0);
     }
 
     public void actionEvent(){

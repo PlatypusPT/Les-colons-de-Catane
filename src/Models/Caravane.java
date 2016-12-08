@@ -6,8 +6,8 @@ package Models;
 
 public class Caravane extends Action {
 
-    public Caravane(int nbPointsVictoire, int nbPointsCommerce) {
-        super(nbPointsVictoire, nbPointsCommerce);
+    public Caravane() {
+        super(0, 0);
     }
 
     public void ceQueDoitFaireLaCarte(){

@@ -6,8 +6,8 @@ package Models;
 
 public class AnneeFaste extends Evenement{
 
-    public AnneeFaste(int nbPointsVictoire, int nbPointsCommerce){
-        super(nbPointsVictoire, nbPointsCommerce);
+    public AnneeFaste(){
+        super(0, 0);
     }
 
     public void actionEvent(){

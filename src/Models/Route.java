@@ -6,8 +6,8 @@ package Models;
 
 public class Route extends Fondation{
 
-    public Route(int nbPointsVictoire, int nbPointsCommerce){
-        super(nbPointsVictoire, nbPointsCommerce);
+    public Route(){
+        super(0, 0);
     }
 
     public void debitRessources(){

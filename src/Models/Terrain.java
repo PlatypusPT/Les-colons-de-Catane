@@ -14,8 +14,8 @@ public class Terrain extends Fondation {
     private boolean isProtege; //this terrain est-il sous la protection d'un camp fortifie ?
     private boolean yaUnBain;
 
-    public Terrain(int nbPointsVictoire, int nbPointsCommerce, String ressource, int nbRessource, int faceDé){
-        super(nbPointsVictoire, nbPointsCommerce);
+    public Terrain(String ressource, int nbRessource, int faceDé){
+        super(0, 0);
         this.ressource = ressource;
         this.setNbRessource(nbRessource);
         this.faceDé = faceDé;

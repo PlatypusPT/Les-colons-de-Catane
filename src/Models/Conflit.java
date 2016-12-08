@@ -6,8 +6,8 @@ package Models;
 
 public class Conflit extends Evenement{
 
-    public Conflit(int nbPointsVictoire, int nbPointsCommerce){
-        super(nbPointsVictoire, nbPointsCommerce);
+    public Conflit(){
+        super(0, 0);
     }
 
     public void actionEvent(){

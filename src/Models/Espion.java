@@ -6,8 +6,8 @@ package Models;
 
 public class Espion extends Action {
 
-    public Espion(int nbPointsVictoire, int nbPointsCommerce) {
-        super(nbPointsVictoire, nbPointsCommerce);
+    public Espion() {
+        super(0, 0);
     }
 
     public void ceQueDoitFaireLaCarte(){

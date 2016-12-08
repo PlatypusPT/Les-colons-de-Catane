@@ -6,8 +6,8 @@ package Models;
 
 public class Alchimiste extends Action{
 
-    public Alchimiste(int nbPointsVictoire, int nbPointsCommerce) {
-        super(nbPointsVictoire, nbPointsCommerce);
+    public Alchimiste() {
+        super(0, 0);
     }
 
     public void ceQueDoitFaireLaCarte(){

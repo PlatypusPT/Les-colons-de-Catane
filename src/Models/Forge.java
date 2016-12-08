@@ -6,7 +6,7 @@ package Models;
 
 public class Forge extends DeveloppementColonie {
 
-    public Forge(int nbPointsVictoire, int nbPointsCommerce){
-        super(nbPointsVictoire, nbPointsCommerce);
+    public Forge(){
+        super(0, 0);
     }
 }

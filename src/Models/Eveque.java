@@ -6,8 +6,8 @@ package Models;
 
 public class Eveque extends Action {
 
-    public Eveque(int nbPointsVictoire, int nbPointsCommerce) {
-        super(nbPointsVictoire, nbPointsCommerce);
+    public Eveque() {
+        super(0, 0);
     }
 
     public void ceQueDoitFaireLaCarte(){

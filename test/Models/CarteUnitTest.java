@@ -8,9 +8,5 @@ import org.junit.Test;
  */
 public class CarteUnitTest {
 
-    @Test
-    public void getCarteUnitTest(){
-        Carte c = new Carte("Bouclier Rouge");
-        Assert.assertEquals("Bouclier Rouge", c.getDos());
-    }
+
 }

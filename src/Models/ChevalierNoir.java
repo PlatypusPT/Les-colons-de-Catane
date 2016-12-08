@@ -6,8 +6,8 @@ package Models;
 
 public class ChevalierNoir extends Action {
 
-    public ChevalierNoir(int nbPointsVictoire, int nbPointsCommerce) {
-        super(nbPointsVictoire, nbPointsCommerce);
+    public ChevalierNoir() {
+        super(0, 0);
     }
 
     public void ceQueDoitFaireLaCarte(){

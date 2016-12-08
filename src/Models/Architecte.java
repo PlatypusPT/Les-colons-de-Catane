@@ -6,8 +6,8 @@ package Models;
 
 public class Architecte extends Evenement{
 
-    public Architecte(int nbPointsVictoire, int nbPointsCommerce){
-        super(nbPointsVictoire, nbPointsCommerce);
+    public Architecte(){
+        super(0, 0);
     }
 
     public void actionEvent(){
