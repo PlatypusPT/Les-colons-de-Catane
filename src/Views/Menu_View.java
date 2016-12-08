@@ -45,11 +45,13 @@ public class Menu_View{
         root = new BorderPane();
         root.getStyleClass().add("body");
         scene = new Scene(root, 700, 700, Color.BLACK);
-        scene.getStylesheets().add(new File(model.ASSETS_PATH+"/css/menu_view.css").toURI().toString());
         stage.setScene(scene);
     }
 
     private void initAttributs() {
+        stage.getScene().getStylesheets().clear();
+        stage.getScene().getStylesheets().add(new File(model.ASSETS_PATH+"/css/menu_view.css").toURI().toString());
+
         // Instanciate menu :3
         menuSection = new VBox();
         menuSection.getStyleClass().add("menu-section");

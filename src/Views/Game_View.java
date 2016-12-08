@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -40,10 +41,16 @@ public class Game_View {
     }
 
     public void initAttributs() {
+        stage.getScene().getStylesheets().clear();
+        stage.getScene().getStylesheets().add(new File(model.ASSETS_PATH+"/css/game_view.css").toURI().toString());
+
         gameSection = new VBox();
         bluePlayerLayout = new GridPane();
+        bluePlayerLayout.setId("blue-player-layout");
         piocheLayout = new GridPane();
+        piocheLayout.setId("pioche-layout");
         redPlayerLayout = new GridPane();
+        redPlayerLayout.setId("red-player-layout");
 
         bluePlayerCards = new ArrayList<ImageView>();
         // for(int i=0;i<model.getBluePlayerCards().length;i++) {
@@ -61,42 +68,42 @@ public class Game_View {
         //     bluePlayerCards.add(i,imageView);
         // }
         System.out.println(model.ASSETS_PATH+"/img/cards/card_dos.png");
-        Image dos = new Image(model.ASSETS_PATH+"/img/cards/card_dos.png",IMG_SMALL_SIZE,IMG_SMALL_SIZE,true,true);
-        Image emplacement = new Image(model.ASSETS_PATH+"/img/cards/no_card.png",IMG_SMALL_SIZE,IMG_SMALL_SIZE,true,true);
+        Image dos = new Image(new File(model.ASSETS_PATH+"/img/cards/card_dos.png").toURI().toString(),IMG_SMALL_SIZE,IMG_SMALL_SIZE,true,true);
+        Image emplacement = new Image(new File(model.ASSETS_PATH+"/img/cards/no_card.png").toURI().toString(),IMG_SMALL_SIZE,IMG_SMALL_SIZE,true,true);
 
         bluePlayerLayout.add(new ImageView(dos),0,0);
-        bluePlayerLayout.add(new ImageView(emplacement),0,1);
-        bluePlayerLayout.add(new ImageView(dos),0,2);
-        bluePlayerLayout.add(new ImageView(emplacement),0,3);
-        bluePlayerLayout.add(new ImageView(dos),0,4);
         bluePlayerLayout.add(new ImageView(emplacement),1,0);
-        bluePlayerLayout.add(new ImageView(dos),1,1);
-        bluePlayerLayout.add(new ImageView(dos),1,2);
-        bluePlayerLayout.add(new ImageView(dos),1,3);
-        bluePlayerLayout.add(new ImageView(emplacement),1,4);
         bluePlayerLayout.add(new ImageView(dos),2,0);
-        bluePlayerLayout.add(new ImageView(emplacement),2,1);
+        bluePlayerLayout.add(new ImageView(emplacement),3,0);
+        bluePlayerLayout.add(new ImageView(dos),4,0);
+        bluePlayerLayout.add(new ImageView(emplacement),0,1);
+        bluePlayerLayout.add(new ImageView(dos),1,1);
+        bluePlayerLayout.add(new ImageView(dos),2,1);
+        bluePlayerLayout.add(new ImageView(dos),3,1);
+        bluePlayerLayout.add(new ImageView(emplacement),4,1);
+        bluePlayerLayout.add(new ImageView(dos),0,2);
+        bluePlayerLayout.add(new ImageView(emplacement),1,2);
         bluePlayerLayout.add(new ImageView(dos),2,2);
-        bluePlayerLayout.add(new ImageView(emplacement),2,3);
-        bluePlayerLayout.add(new ImageView(dos),2,4);
+        bluePlayerLayout.add(new ImageView(emplacement),3,2);
+        bluePlayerLayout.add(new ImageView(dos),4,2);
 
         for(int i=0;i<10;i++) piocheLayout.add(new ImageView(dos),i,0);
 
         redPlayerLayout.add(new ImageView(dos),0,0);
-        redPlayerLayout.add(new ImageView(emplacement),0,1);
-        redPlayerLayout.add(new ImageView(dos),0,2);
-        redPlayerLayout.add(new ImageView(emplacement),0,3);
-        redPlayerLayout.add(new ImageView(dos),0,4);
         redPlayerLayout.add(new ImageView(emplacement),1,0);
-        redPlayerLayout.add(new ImageView(dos),1,1);
-        redPlayerLayout.add(new ImageView(dos),1,2);
-        redPlayerLayout.add(new ImageView(dos),1,3);
-        redPlayerLayout.add(new ImageView(emplacement),1,4);
         redPlayerLayout.add(new ImageView(dos),2,0);
-        redPlayerLayout.add(new ImageView(emplacement),2,1);
+        redPlayerLayout.add(new ImageView(emplacement),3,0);
+        redPlayerLayout.add(new ImageView(dos),4,0);
+        redPlayerLayout.add(new ImageView(emplacement),0,1);
+        redPlayerLayout.add(new ImageView(dos),1,1);
+        redPlayerLayout.add(new ImageView(dos),2,1);
+        redPlayerLayout.add(new ImageView(dos),3,1);
+        redPlayerLayout.add(new ImageView(emplacement),4,1);
+        redPlayerLayout.add(new ImageView(dos),0,2);
+        redPlayerLayout.add(new ImageView(emplacement),1,2);
         redPlayerLayout.add(new ImageView(dos),2,2);
-        redPlayerLayout.add(new ImageView(emplacement),2,3);
-        redPlayerLayout.add(new ImageView(dos),2,4);
+        redPlayerLayout.add(new ImageView(emplacement),3,2);
+        redPlayerLayout.add(new ImageView(dos),4,2);
     }
 
     public void setPartyView() {
