@@ -60,8 +60,8 @@ public class Game_View {
         //     ImageView imageView = new ImageView(model.getRedPlayerCards()[i].image);
         //     bluePlayerCards.add(i,imageView);
         // }
-        System.out.println(model.ASSETS_PATH+"/img/cards/card_builder_dos.png.png");
-        Image dos = new Image(model.ASSETS_PATH+"/img/cards/card_builder_dos.png.png",IMG_SMALL_SIZE,IMG_SMALL_SIZE,true,true);
+        System.out.println(model.ASSETS_PATH+"/img/cards/card_dos.png");
+        Image dos = new Image(model.ASSETS_PATH+"/img/cards/card_dos.png",IMG_SMALL_SIZE,IMG_SMALL_SIZE,true,true);
         Image emplacement = new Image(model.ASSETS_PATH+"/img/cards/no_card.png",IMG_SMALL_SIZE,IMG_SMALL_SIZE,true,true);
 
         bluePlayerLayout.add(new ImageView(dos),0,0);
