@@ -1,7 +1,7 @@
 package Views;
 
-import Models.Carte;
 import Models.Model;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Created by yhaffner on 08/12/16.
  */
 public class Game_View {
-    public static int IMG_SMALL_SIZE = 65;
+    public static int IMG_SMALL_SIZE = 64;
     public static int IMG_MEDIUM_SIZE = 100;
     public static int IMG_HUGE_SIZE = 400;
 
@@ -45,6 +45,7 @@ public class Game_View {
         stage.getScene().getStylesheets().add(new File(model.ASSETS_PATH+"/css/game_view.css").toURI().toString());
 
         gameSection = new VBox();
+        gameSection.setId("plateau-layout");
         bluePlayerLayout = new GridPane();
         bluePlayerLayout.setId("blue-player-layout");
         piocheLayout = new GridPane();
@@ -67,7 +68,6 @@ public class Game_View {
         //     ImageView imageView = new ImageView(model.getRedPlayerCards()[i].image);
         //     bluePlayerCards.add(i,imageView);
         // }
-        System.out.println(model.ASSETS_PATH+"/img/cards/card_dos.png");
         Image dos = new Image(new File(model.ASSETS_PATH+"/img/cards/card_dos.png").toURI().toString(),IMG_SMALL_SIZE,IMG_SMALL_SIZE,true,true);
         Image emplacement = new Image(new File(model.ASSETS_PATH+"/img/cards/no_card.png").toURI().toString(),IMG_SMALL_SIZE,IMG_SMALL_SIZE,true,true);
 
