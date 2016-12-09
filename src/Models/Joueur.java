@@ -11,7 +11,7 @@ public class Joueur {
 	//private Plateau plateau;
 	private ArrayList<Carte> principaute;
 	private ArrayList<Carte> main;
-    public final static String[] COULEURS = {"jaune","rouge","vert","bleu","magenta","blanc"};
+    	public final static String[] COULEURS = {"jaune","rouge","vert","bleu","magenta","blanc"};
 
 	public Joueur(String nom, int couleurBlason) {
 		this.nom = nom;
