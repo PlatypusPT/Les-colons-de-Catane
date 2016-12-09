@@ -1,21 +1,29 @@
-#start-button,#option-button{
+#start-button,#option-button,#real-start-button{
     -fx-text-fill: rgb(245,204,34);
     -fx-font: bold 28px Gentium;
     -fx-background-color: rgb(132,28,32);
     -fx-text-align: center;
     -fx-pref-width: 12em;
 }
-#start-button:hover,#option-button:hover{
+#real-start-button,#start-button:hover,#option-button:hover{
     -fx-background-color: rgb(120,25,28);
+}
+#real-start-button {
+    -fx-start-margin: 1em;
 }
 
 .menu-section{
+    -fx-alignment: top-center;
     -fx-padding: 1em;
-    -fx-alignment: center;
     -fx-background-color: black;
     -fx-spacing: 1em;
     -fx-max-width: 26em;
     -fx-max-height: 10em;
+}
+
+.fieldset {
+    -fx-text-fill: white;
+    -fx-font-size: 1.2em;
 }
 
 .body {

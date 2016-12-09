@@ -22,6 +22,7 @@ public class Control_Menu implements EventHandler<ActionEvent>{
     @Override
     public void handle(ActionEvent event) {
         System.out.println("Button clicked: "+event.getSource());
-        if(view.startButton.equals(event.getSource())) view.startGame();
+        if(view.startButton.equals(event.getSource())) view.setWidgetStartGameParam();
+        if(view.realStartButton.equals(event.getSource())) view.startGame();
     }
 }
