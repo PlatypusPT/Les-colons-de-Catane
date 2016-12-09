@@ -7,6 +7,6 @@ package Models;
 public class Comptoir extends DeveloppementVille {
 
     public Comptoir(){
-        super(0,2);
+        super(0,2,null);
     }
 }
