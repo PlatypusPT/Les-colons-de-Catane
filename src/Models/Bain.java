@@ -6,8 +6,8 @@ package Models;
 
 public class Bain extends DeveloppementVille {
 
-    public Bain(){
-        super(1,0);
+    public Bain(String image){
+        super(1,0, image);
     }
 
     public void ajouterUnBain(){

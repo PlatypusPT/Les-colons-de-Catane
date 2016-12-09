@@ -6,8 +6,8 @@ package Models;
 
 public class NouvelAn extends Evenement{
 
-    public NouvelAn(int nbPointsVictoire, int nbPointsCommerce){
-        super(nbPointsVictoire, nbPointsCommerce);
+    public NouvelAn(String image){
+        super(0, 0, image);
     }
 
     public void actionEvent(){

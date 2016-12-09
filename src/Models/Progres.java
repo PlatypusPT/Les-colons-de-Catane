@@ -6,8 +6,8 @@ package Models;
 
 public class Progres extends Evenement{
 
-    public Progres(int nbPointsVictoire, int nbPointsCommerce){
-        super(nbPointsVictoire, nbPointsCommerce);
+    public Progres(String image){
+        super(0, 0, image);
     }
 
     public void actionEvent(){

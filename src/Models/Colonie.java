@@ -11,8 +11,8 @@ public class Colonie extends Fondation {
     private Route rte1;
     private Route rte2;//rte1 & rte2 sont les routes qui partent de this colonie
 
-    public Colonie(){
-        super(1, 0);
+    public Colonie(String image){
+        super(1, 0, image);
         terrains = new Terrain[4];
         batiments = new DeveloppementColonie[2];
         this.rte1 = null;

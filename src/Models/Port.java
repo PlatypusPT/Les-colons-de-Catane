@@ -6,8 +6,8 @@ package Models;
 
 public class Port extends DeveloppementVille {
 
-    public Port(){
-        super(0,1);
+    public Port(String image){
+        super(0,1, image);
     }
 
     public void ajouterPort(){

@@ -6,8 +6,8 @@ package Models;
 
 public class Architecte extends Evenement{
 
-    public Architecte(){
-        super(0, 0);
+    public Architecte(String image){
+        super(0, 0, image);
     }
 
     public void actionEvent(){

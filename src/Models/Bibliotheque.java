@@ -6,8 +6,8 @@ package Models;
 
 public class Bibliotheque extends DeveloppementVille {
 
-    public Bibliotheque(){
-        super(1,0);
+    public Bibliotheque(String image){
+        super(1,0, image);
     }
 
     public void ajouterBibliotheque(){

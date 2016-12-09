@@ -6,8 +6,8 @@ package Models;
 
 public class AnneeFaste extends Evenement{
 
-    public AnneeFaste(){
-        super(0, 0);
+    public AnneeFaste(String image){
+        super(0, 0, image);
     }
 
     public void actionEvent(){

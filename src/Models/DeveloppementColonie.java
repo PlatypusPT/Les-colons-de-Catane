@@ -8,8 +8,8 @@ abstract public class DeveloppementColonie extends Developpement {
 
     protected Colonie colonie;
 
-    public DeveloppementColonie(int nbPointsVictoire, int nbPointsCommerce){
-        super(nbPointsVictoire, nbPointsCommerce);
+    public DeveloppementColonie(int nbPointsVictoire, int nbPointsCommerce, String image){
+        super(nbPointsVictoire, nbPointsCommerce, image);
         colonie = null;
     }
 
@@ -20,4 +20,6 @@ abstract public class DeveloppementColonie extends Developpement {
     public Colonie getColonie(){
         return colonie;
     }
+
+    abstract public void debitRessources();
 }

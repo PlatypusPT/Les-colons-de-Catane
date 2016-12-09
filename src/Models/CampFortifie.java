@@ -8,8 +8,8 @@ public class CampFortifie extends DeveloppementColonie {
 
     private Terrain terrainVoisins[];
 
-    public CampFortifie(){
-        super(0, 1);
+    public CampFortifie(String image){
+        super(0, 1, image);
         terrainVoisins = new Terrain[2];
     }
 
@@ -18,5 +18,11 @@ public class CampFortifie extends DeveloppementColonie {
         t1.proteger();
         terrainVoisins[1] = t2;
         t2.proteger();
+    }
+
+    public void debitRessources(){
+        /*
+        code de la methode...
+         */
     }
 }

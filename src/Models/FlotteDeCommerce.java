@@ -9,8 +9,8 @@ public class FlotteDeCommerce extends DeveloppementColonie {
     private String ressource; //ressource concernee par this flotte de commerce
     private boolean eglise; //true si il y a une eglise dans la ville ou y'a this flotte
 
-    public FlotteDeCommerce(String ressource){
-        super(0, 1);
+    public FlotteDeCommerce(String ressource, String image){
+        super(0, 1, image);
         this.ressource = ressource;
         eglise = false;
     }
@@ -25,5 +25,11 @@ public class FlotteDeCommerce extends DeveloppementColonie {
 
     public boolean isProtege(){
         return true;
+    }
+
+    public void debitRessources(){
+        /*
+        code de la methode...
+         */
     }
 }

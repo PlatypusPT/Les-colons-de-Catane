@@ -6,7 +6,13 @@ package Models;
 
 public class ColosseDeCatane extends DeveloppementVille {
 
-    public ColosseDeCatane(){
-        super(2,0);
+    public ColosseDeCatane(String image){
+        super(2,0, image);
+    }
+
+    public void ajouterColosse(){
+        /*
+        code de la methode...
+         */
     }
 }

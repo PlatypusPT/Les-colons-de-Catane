@@ -6,8 +6,8 @@ package Models;
 
 public class Eclaireur extends Action {
 
-    public Eclaireur() {
-        super(0, 0);
+    public Eclaireur(String image) {
+        super(0, 0, image);
     }
 
     public void ceQueDoitFaireLaCarte(){

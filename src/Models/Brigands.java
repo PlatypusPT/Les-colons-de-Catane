@@ -6,8 +6,8 @@ package Models;
 
 public class Brigands extends Action {
 
-    public Brigands() {
-        super(0, 0);
+    public Brigands(String image) {
+        super(0, 0, image);
     }
 
     public void ceQueDoitFaireLaCarte(){

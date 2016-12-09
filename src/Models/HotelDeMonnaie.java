@@ -6,7 +6,13 @@ package Models;
 
 public class HotelDeMonnaie extends DeveloppementVille {
 
-    public HotelDeMonnaie(){
-        super(0,1);
+    public HotelDeMonnaie(String image){
+        super(0,1, image);
+    }
+
+    public void ajouterHotelDeMonnaie(){
+        /*
+        code de la methode...
+         */
     }
 }

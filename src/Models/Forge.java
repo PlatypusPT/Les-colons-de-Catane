@@ -6,7 +6,13 @@ package Models;
 
 public class Forge extends DeveloppementColonie {
 
-    public Forge(){
-        super(0, 0);
+    public Forge(String image){
+        super(0, 0, image);
+    }
+
+    public void debitRessources(){
+        /*
+        code de la methode...
+         */
     }
 }

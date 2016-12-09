@@ -6,7 +6,13 @@ package Models;
 
 public class Monastere extends DeveloppementColonie {
 
-    public Monastere(int nbPointsVictoire, int nbPointsCommerce){
-        super(nbPointsVictoire, nbPointsCommerce);
+    public Monastere(String image){
+        super(0, 0, image);
+    }
+
+    public void debitRessources(){
+        /*
+        code de la methode...
+         */
     }
 }

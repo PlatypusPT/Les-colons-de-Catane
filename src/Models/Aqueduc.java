@@ -6,7 +6,13 @@ package Models;
 
 public class Aqueduc extends DeveloppementVille {
 
-    public Aqueduc(){
-        super(1,0);
+    public Aqueduc(String image){
+        super(1,0, image);
+    }
+
+    public void ajouterAqueduc(){
+        /*
+        code de la methode...
+         */
     }
 }

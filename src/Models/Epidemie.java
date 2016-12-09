@@ -6,8 +6,8 @@ package Models;
 
 public class Epidemie extends Evenement {
 
-    public Epidemie(){
-        super(0, 0);
+    public Epidemie(String image){
+        super(0, 0, image);
     }
 
     public void actionEvent(){

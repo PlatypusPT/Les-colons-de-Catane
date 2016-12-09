@@ -10,8 +10,8 @@ public class Chevalier extends DeveloppementColonie {
     private int nbPointsCombat; //nombre de points de combat de this chevalier
     private boolean eglise; //true si il y a une eglise dans la ville ou y'a this chevalier
 
-    public Chevalier(int nbPointsTournoi, int nbPointsCombat){
-        super(0, 0);
+    public Chevalier(int nbPointsTournoi, int nbPointsCombat, String image){
+        super(0, 0, image);
         this.nbPointsTournoi = nbPointsTournoi;
         this.nbPointsCombat = nbPointsCombat;
         eglise = false;
@@ -35,5 +35,11 @@ public class Chevalier extends DeveloppementColonie {
 
     public boolean isProtege(){
         return true;
+    }
+
+    public void debitRessources(){
+        /*
+        code de la methode...
+         */
     }
 }

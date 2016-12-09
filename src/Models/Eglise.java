@@ -6,8 +6,8 @@ package Models;
 
 public class Eglise extends DeveloppementVille {
 
-    public Eglise(){
-        super(1,0);
+    public Eglise(String image){
+        super(1,0, image);
     }
 
     public void ajouterEglise(){
