@@ -59,8 +59,8 @@ public class Game_View {
         //     bluePlayerCards.add(i,imageView);
         // }
         piocheCards = new ArrayList<ImageView>();
-        // for(int i=0;i<model.getLayoutPlayerCards().length;i++) {
-        //     ImageView imageView = new ImageView(model.getLayoutCards()[i].image);
+        // for(int i=0;i<model.getPiocheCards().length;i++) {
+        //     ImageView imageView = new ImageView(model.getPiocheCards()[i].image);
         //     bluePlayerCards.add(i,imageView);
         // }
         redPlayerCards = new ArrayList<ImageView>();
