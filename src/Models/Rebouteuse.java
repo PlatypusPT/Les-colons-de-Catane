@@ -6,8 +6,8 @@ package Models;
 
 public class Rebouteuse extends Action {
 
-    public Rebouteuse(int nbPointsVictoire, int nbPointsCommerce) {
-        super(nbPointsVictoire, nbPointsCommerce);
+    public Rebouteuse(String image) {
+        super(0, 0, image);
     }
 
     public void ceQueDoitFaireLaCarte(){

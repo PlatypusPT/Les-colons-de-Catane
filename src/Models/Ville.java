@@ -9,8 +9,8 @@ public class Ville extends Fondation{
     private Colonie colonie; //colonie à partir de laquelle on construit this ville
     private DeveloppementVille Batiments[]; //différents bâtiments de la ville
 
-    public Ville(){
-        super(2, 0);
+    public Ville(String image){
+        super(2, 0, image);
         this.colonie = null;
         Batiments = new DeveloppementVille[4];
     }

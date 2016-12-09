@@ -5,8 +5,8 @@ package Models;
  */
 public class Marchand extends Action {
 
-    public Marchand(int nbPointsVictoire, int nbPointsCommerce) {
-        super(nbPointsVictoire, nbPointsCommerce);
+    public Marchand(String image) {
+        super(0, 0, image);
     }
 
     public void ceQueDoitFaireLaCarte(){

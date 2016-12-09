@@ -6,8 +6,8 @@ package Models;
 
 public class Alchimiste extends Action{
 
-    public Alchimiste() {
-        super(0, 0);
+    public Alchimiste(String image) {
+        super(0, 0, image);
     }
 
     public void ceQueDoitFaireLaCarte(){

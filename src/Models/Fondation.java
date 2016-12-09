@@ -6,8 +6,8 @@ package Models;
 
 abstract public class Fondation extends Carte{
 
-    public Fondation(int nbPointsVictoire, int nbPointCommerce){
-        super(nbPointsVictoire, nbPointCommerce);
+    public Fondation(int nbPointsVictoire, int nbPointCommerce, String image){
+        super(nbPointsVictoire, nbPointCommerce, image);
     }
 
     abstract public void debitRessources();

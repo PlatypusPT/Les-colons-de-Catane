@@ -8,10 +8,12 @@ abstract public class Carte {
 
     protected int nbPointsVictoire; //nb de points de victoire que rapporte this carte
     protected int nbPointsCommerce; //nb de points de commerce que rapporte this carte
+    protected String image; //image de la carte
 
-    public Carte(int nbPointsVictoire, int nbPointsCommerce){
+    public Carte(int nbPointsVictoire, int nbPointsCommerce, String image){
         this.nbPointsVictoire = nbPointsVictoire;
         this.nbPointsCommerce = nbPointsCommerce;
+        this.image = image;
     }
 
     public int getNbPointsVictoire(){

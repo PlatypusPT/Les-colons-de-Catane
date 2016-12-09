@@ -6,8 +6,8 @@ package Models;
 
 public class Espion extends Action {
 
-    public Espion() {
-        super(0, 0);
+    public Espion(String image) {
+        super(0, 0, image);
     }
 
     public void ceQueDoitFaireLaCarte(){

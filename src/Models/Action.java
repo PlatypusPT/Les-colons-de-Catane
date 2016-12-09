@@ -6,8 +6,8 @@ package Models;
 
 abstract public class Action extends Developpement {
 
-    public Action(int nbPointsVictoire, int nbPointsCommerce) {
-        super(0, 0);
+    public Action(int nbPointsVictoire, int nbPointsCommerce, String image) {
+        super(0, 0, image);
     }
 
     abstract public void ceQueDoitFaireLaCarte();

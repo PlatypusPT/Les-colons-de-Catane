@@ -8,8 +8,8 @@ abstract public class DeveloppementVille extends Developpement {
 
     protected Ville ville;
 
-    public DeveloppementVille(int nbPointsVictoire, int nbPointsCommerce){
-        super(nbPointsVictoire, nbPointsCommerce);
+    public DeveloppementVille(int nbPointsVictoire, int nbPointsCommerce, String image){
+        super(nbPointsVictoire, nbPointsCommerce, image);
         ville = null;
     }
 

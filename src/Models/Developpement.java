@@ -6,7 +6,7 @@ package Models;
 
 abstract public class Developpement extends Carte {
 
-	public Developpement(int nbPointsVictoire, int nbPointsCommerce) {
-		super(nbPointsVictoire, nbPointsCommerce);
+	public Developpement(int nbPointsVictoire, int nbPointsCommerce, String image) {
+		super(nbPointsVictoire, nbPointsCommerce, image);
 	}
 }

@@ -6,8 +6,8 @@ package Models;
 
 public class GuerreCivile extends Evenement{
 
-    public GuerreCivile(int nbPointsVictoire, int nbPointsCommerce){
-        super(nbPointsVictoire, nbPointsCommerce);
+    public GuerreCivile(String image){
+        super(0, 0, image);
     }
 
     public void actionEvent(){

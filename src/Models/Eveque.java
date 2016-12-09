@@ -6,8 +6,8 @@ package Models;
 
 public class Eveque extends Action {
 
-    public Eveque() {
-        super(0, 0);
+    public Eveque(String image) {
+        super(0, 0, image);
     }
 
     public void ceQueDoitFaireLaCarte(){

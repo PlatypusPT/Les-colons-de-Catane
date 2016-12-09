@@ -6,8 +6,8 @@ package Models;
 
 public class Incendiaire extends Action {
 
-    public Incendiaire(int nbPointsVictoire, int nbPointsCommerce) {
-        super(nbPointsVictoire, nbPointsCommerce);
+    public Incendiaire(String image) {
+        super(0, 0, image);
     }
 
     public void ceQueDoitFaireLaCarte(){

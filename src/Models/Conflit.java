@@ -6,8 +6,8 @@ package Models;
 
 public class Conflit extends Evenement{
 
-    public Conflit(){
-        super(0, 0);
+    public Conflit(String image){
+        super(0, 0, image);
     }
 
     public void actionEvent(){

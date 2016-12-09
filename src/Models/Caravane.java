@@ -6,8 +6,8 @@ package Models;
 
 public class Caravane extends Action {
 
-    public Caravane() {
-        super(0, 0);
+    public Caravane(String image) {
+        super(0, 0, image);
     }
 
     public void ceQueDoitFaireLaCarte(){

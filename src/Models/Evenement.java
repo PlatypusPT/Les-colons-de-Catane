@@ -6,8 +6,8 @@ package Models;
 
 abstract public class Evenement extends Carte{
 
-    public Evenement(int nbPointsVictoire, int nbPointsCommerce){
-        super(nbPointsVictoire, nbPointsCommerce);
+    public Evenement(int nbPointsVictoire, int nbPointsCommerce, String image){
+        super(nbPointsVictoire, nbPointsCommerce, image);
     }
 
     abstract public void actionEvent();

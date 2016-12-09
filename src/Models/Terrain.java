@@ -1,5 +1,7 @@
 package Models;
 
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
+
 /**
  * Created by alex on 21/11/16.
  */
@@ -14,8 +16,8 @@ public class Terrain extends Fondation {
     private boolean isProtege; //this terrain est-il sous la protection d'un camp fortifie ?
     private boolean yaUnBain;
 
-    public Terrain(String ressource, int nbRessource, int faceDé){
-        super(0, 0);
+    public Terrain(String ressource, int nbRessource, int faceDé, String image){
+        super(0, 0, image);
         this.ressource = ressource;
         this.setNbRessource(nbRessource);
         this.faceDé = faceDé;
