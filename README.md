@@ -4,7 +4,7 @@ Lien vers Trello : https://trello.com/b/0f1oRtlF/les-princes-de-catane
 
 Tuto JavaFX : https://openclassrooms.com/courses/les-applications-web-avec-javafx
 
-Règles des princes de Catane : http://www.ludism.fr/regles_files/fr/LesColonsdeCathane_Jeudecartes_2_joueurs.pdf
+Règles des colons de Catane : http://www.ludism.fr/regles_files/fr/LesColonsdeCathane_Jeudecartes_2_joueurs.pdf
 
 Règles vidéo : https://www.youtube.com/watch?v=b0sXXHLP7C4
 
