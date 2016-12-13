@@ -1,5 +1,6 @@
 package Views;
 
+import Controllers.Partie;
 import Models.Joueur;
 import Models.Model;
 import javafx.event.ActionEvent;
@@ -15,6 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Created by yhaffner on 21/11/16.
@@ -30,18 +32,14 @@ public class Menu_View{
     private Scene scene;
     private Game_View game_view;
 
-    private Label j1Label;
-    private RadioButton[] blasonsIMGJ1;
-    private RadioButton[] blasonsIMGJ2;
-    private Label j2Label;
-    private TextField j1nomTextField;
+    private Label jLabel;
+    public ArrayList<RadioButton> blasonsIMGJ;
+    public TextField jnomTextField;
 
-    private TextField j2nomTextField;
-    public ToggleGroup groupJ1 = new ToggleGroup();
-    public ToggleGroup groupJ2 = new ToggleGroup();
-    private GridPane blasonsJ1;
-    private GridPane blasonsJ2;
+    public ToggleGroup groupJ = new ToggleGroup();
+    private GridPane blasonsJ;
     public Button realStartButton;
+    public Button continueButton;
 
     public Menu_View(Model model, Stage stage) {
         this.model = model;
@@ -75,91 +73,73 @@ public class Menu_View{
         menuSection.getStyleClass().add("menu-section");
         startButton = new Button("COMMENCER");
         startButton.setId("start-button");
+        continueButton = new Button("CONTINUER");
+        continueButton.setId("real-start-button");
         realStartButton = new Button("DÉMARRER LA PARTIE");
         realStartButton.setId("real-start-button");
         optionButton = new Button("OPTIONS");
         optionButton.setId("option-button");
 
-        groupJ1 = new ToggleGroup();
-        groupJ2 = new ToggleGroup();
-        blasonsJ1 = new GridPane();
-        blasonsJ2 = new GridPane();
-        j1Label = new Label("JOUEUR 1");
-        j1Label.getStyleClass().add("fieldset");
-        j2Label = new Label("JOUEUR 2");
-        j2Label.getStyleClass().add("fieldset");
+        groupJ = new ToggleGroup();
+        blasonsJ = new GridPane();
+        jLabel = new Label();
+        jLabel.getStyleClass().add("fieldset");
 
-        j1nomTextField = new TextField();
-        j1nomTextField.setPromptText("J1");
-        j2nomTextField = new TextField();
-        j2nomTextField.setPromptText("J2");
+        jnomTextField = new TextField();
 
-        blasonsIMGJ1 = new RadioButton[Joueur.COULEURS.length];
+        blasonsIMGJ = new ArrayList<>();
         for(int i=0;i<Joueur.COULEURS.length;i++) {
-            blasonsIMGJ1[i] = new RadioButton();
-            blasonsIMGJ1[i].setGraphic(new ImageView(new Image(new File(model.ASSETS_PATH+"/img/blasons/"+ Joueur.COULEURS[i]+"_shield.png").toURI().toString(),60,60,true,true)));
+            blasonsIMGJ.add(new RadioButton());
+            blasonsIMGJ.get(i).setGraphic(new ImageView(new Image(new File(model.ASSETS_PATH+"/img/blasons/"+ Joueur.COULEURS[i]+"_shield.png").toURI().toString(),60,60,true,true)));
         }
-        for(RadioButton rb:blasonsIMGJ1) rb.setToggleGroup(groupJ1);
-        blasonsIMGJ1[0].setSelected(true);
-        blasonsIMGJ2 = new RadioButton[Joueur.COULEURS.length];
-        for(int i=0;i<Joueur.COULEURS.length;i++) {
-            blasonsIMGJ2[i] = new RadioButton();
-            blasonsIMGJ2[i].setGraphic(new ImageView(new Image(new File(model.ASSETS_PATH+"/img/blasons/"+ Joueur.COULEURS[i]+"_shield.png").toURI().toString(),60,60,true,true)));
-        }
-        for(RadioButton rb:blasonsIMGJ2) rb.setToggleGroup(groupJ2);
-        blasonsIMGJ2[1].setSelected(true);
+        for(RadioButton rb:blasonsIMGJ) rb.setToggleGroup(groupJ);
+        blasonsIMGJ.get(0).setSelected(true);
     }
 
     public void setWidgetMenuPrincipal() {
-        // Suppression de l'ancien contenu
         stage.hide();
-
         ((BorderPane) stage.getScene().getRoot()).getChildren().clear();
         menuSection.getChildren().clear();
-
-        // Menu content
         menuSection.getChildren().add(startButton);
         menuSection.getChildren().add(optionButton);
         ((BorderPane) stage.getScene().getRoot()).setCenter(menuSection);
-
-        // Affichage du nouveau contenu
         stage.show();
     }
 
-    public void setWidgetStartGameParam() {
-        // Suppression de l'ancien contenu
+    public void setWidgetAskFirstPlayer() {
         stage.hide();
-
         ((BorderPane) stage.getScene().getRoot()).getChildren().clear();
         menuSection.getChildren().clear();
-        blasonsJ1.getChildren().clear();
-        blasonsJ2.getChildren().clear();
+        blasonsJ.getChildren().clear();
+        jLabel.setText("JOUEUR 1");
+        jnomTextField.setPromptText("J1");
+        for (int i = 0; i< blasonsIMGJ.size(); i++) blasonsJ.add(blasonsIMGJ.get(i),i%(blasonsIMGJ.size()/2),i/(blasonsIMGJ.size()/2));
+        menuSection.getChildren().add(jLabel);
+        menuSection.getChildren().add(jnomTextField);
+        menuSection.getChildren().add(blasonsJ);
+        menuSection.getChildren().add(continueButton);
+        ((BorderPane) stage.getScene().getRoot()).setCenter(menuSection);
+        stage.show();
+    }
 
-        // BlasonJ1
-        for (int i = 0; i< blasonsIMGJ1.length; i++) blasonsJ1.add(blasonsIMGJ1[i],i%(blasonsIMGJ1.length/2),i/(blasonsIMGJ1.length/2));
-        // BlasonJ2
-        for (int i = 0; i< blasonsIMGJ2.length; i++) blasonsJ2.add(blasonsIMGJ2[i],i%(blasonsIMGJ2.length/2),i/(blasonsIMGJ1.length/2));
-
-
-
-        // Menu content
-        menuSection.getChildren().add(j1Label);
-        menuSection.getChildren().add(j1nomTextField);
-        menuSection.getChildren().add(blasonsJ1);
-        menuSection.getChildren().add(j2Label);
-        menuSection.getChildren().add(j2nomTextField);
-        menuSection.getChildren().add(blasonsJ2);
+    public void setWidgetAskSecondPlayer() {
+        stage.hide();
+        ((BorderPane) stage.getScene().getRoot()).getChildren().clear();
+        menuSection.getChildren().clear();
+        blasonsJ.getChildren().clear();
+        jLabel.setText("JOUEUR 2");
+        jnomTextField.setPromptText("J2");
+        for (int i = 0; i< blasonsIMGJ.size(); i++) blasonsJ.add(blasonsIMGJ.get(i),i%(blasonsIMGJ.size()/2),i/(blasonsIMGJ.size()/2));
+        menuSection.getChildren().add(jLabel);
+        menuSection.getChildren().add(jnomTextField);
+        menuSection.getChildren().add(blasonsJ);
         menuSection.getChildren().add(realStartButton);
         ((BorderPane) stage.getScene().getRoot()).setCenter(menuSection);
-
-        // Affichage du nouveau contenu
         stage.show();
     }
 
 
-
-
-    public void startGame(){
+    public void startGame(Partie partie){
         if(game_view==null) game_view=new Game_View(model,stage,this);
         game_view.initAttributs();
         game_view.setPartyView();
@@ -169,5 +149,6 @@ public class Menu_View{
         startButton.setOnAction(control_menu);
         realStartButton.setOnAction(control_menu);
         optionButton.setOnAction(control_menu);
+        continueButton.setOnAction(control_menu);
     }
 }
