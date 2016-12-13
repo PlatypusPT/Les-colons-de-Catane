@@ -1,6 +1,6 @@
 package Views;
 
-import Controllers.Partie;
+import Models.Partie;
 import Models.Joueur;
 import Models.Model;
 import javafx.event.ActionEvent;

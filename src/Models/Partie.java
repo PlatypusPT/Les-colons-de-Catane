@@ -30,15 +30,19 @@ public class Partie {
         tas3 = new ArrayList<>();
         tas4 = new ArrayList<>();
         tas5 = new ArrayList<>();
+        initPioche();
+        initTas();
     }
 
     public void initPioche() {
-        String img = "card_dos.png";
+        String img = "Assets/img/cards/card_dos.png";
         String ressource = "";
         int tournoi = 0;
         int combat = 0;
-        pioche.add(new Alchimiste(img));
-        pioche.add(new Alchimiste(img));
+        Alchimiste a1 = new Alchimiste(img);
+        Alchimiste a2 = new Alchimiste(img);
+        pioche.add(a1);
+        pioche.add(a2);
         pioche.add(new Marchand(img));
         pioche.add(new Marchand(img));
         pioche.add(new Eveque(img));
