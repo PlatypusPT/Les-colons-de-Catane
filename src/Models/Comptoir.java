@@ -6,7 +6,7 @@ package Models;
 
 public class Comptoir extends DeveloppementVille {
 
-    public Comptoir(){
-        super(0,2,null);
+    public Comptoir(String image){
+        super(0,2,image);
     }
 }
