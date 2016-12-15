@@ -8,16 +8,14 @@ public class Joueur {
 	private String nom; //nom du joueur #groscommentaire
 	private int nbPointsVictoire; //nombre de PV du joueur. maximum : 12
 	private int couleurBlason; //noir ou rouge
-	//private Plateau plateau;
 	private ArrayList<Carte> principaute;
 	private ArrayList<Carte> main;
-    	public final static String[] COULEURS = {"jaune","rouge","vert","bleu","magenta","blanc"};
+    public final static String[] COULEURS = {"jaune","rouge","vert","bleu","magenta","blanc"};
 
 	public Joueur(String nom, int couleurBlason) {
 		this.nom = nom;
 		this.couleurBlason = couleurBlason;
 		nbPointsVictoire = 0;
-		//plateau = null;
 		principaute = new ArrayList<>();
 		principaute.add(new Terrain("Blé", 1, 1,null));
 		principaute.add(new Terrain("Fer", 1, 2,null));
@@ -45,10 +43,6 @@ public class Joueur {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
-	//public void setPlateau(Plateau plateau){ this.plateau = plateau; }
-
-	//public Plateau getPlateau(){ return plateau ;}
 
 	public void setNbPointsVictoire(int nbPointsVictoire) {
 		this.nbPointsVictoire = nbPointsVictoire;

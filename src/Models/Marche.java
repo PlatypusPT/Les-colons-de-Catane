@@ -3,6 +3,7 @@ package Models;
 /**
  * Created by alex on 09/12/16.
  */
+
 public class Marche extends DeveloppementVille{
 
     public Marche(String image){

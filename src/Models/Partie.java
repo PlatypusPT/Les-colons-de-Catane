@@ -1,6 +1,5 @@
 package Models;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -14,11 +13,12 @@ public class Partie {
     private Joueur joueur2;
     private ArrayList<Carte> pioche;
     private Random random;
-    private ArrayList<Carte> tas1;
-    private ArrayList<Carte> tas2;
-    private ArrayList<Carte> tas3;
-    private ArrayList<Carte> tas4;
-    private ArrayList<Carte> tas5;
+    private static ArrayList<Carte> tas1;
+    private static ArrayList<Carte> tas2;
+    private static ArrayList<Carte> tas3;
+    private static ArrayList<Carte> tas4;
+    private static ArrayList<Carte> tas5;
+    private static ArrayList<Carte> evenements;
 
     public Partie(Joueur joueur1, Joueur joueur2){
         this.joueur1 = joueur1;
@@ -30,8 +30,10 @@ public class Partie {
         tas3 = new ArrayList<>();
         tas4 = new ArrayList<>();
         tas5 = new ArrayList<>();
+        evenements = new ArrayList<>();
         initPioche();
         initTas();
+        initEvenement();
     }
 
     public void initPioche() {
@@ -39,10 +41,8 @@ public class Partie {
         String ressource = "";
         int tournoi = 0;
         int combat = 0;
-        Alchimiste a1 = new Alchimiste(img);
-        Alchimiste a2 = new Alchimiste(img);
-        pioche.add(a1);
-        pioche.add(a2);
+        pioche.add(new Alchimiste(img));
+        pioche.add(new Alchimiste(img));
         pioche.add(new Marchand(img));
         pioche.add(new Marchand(img));
         pioche.add(new Eveque(img));
@@ -105,7 +105,7 @@ public class Partie {
         pioche.add(new Aqueduc(img));
     }
 
-    public void initTas() {
+    private void initTas() {
         for (int i=0; i<12; i++) {
             tas1.add(pioche.remove(random.nextInt(pioche.size())));
         }
@@ -123,7 +123,38 @@ public class Partie {
         }
     }
 
-    public void piocheCarte() {
+    private void initEvenement(){
+        String img = "Assets/img/cards/card_dos.png";
+        evenements.add(new Architecte(img));
+        evenements.add(new GuerreCivile(img));
+        evenements.add(new AnneeFaste(img));
+        evenements.add(new AnneeFaste(img));
+        evenements.add(new Progres(img));
+        evenements.add(new Progres(img));
+        evenements.add(new NouvelAn(img));
+        evenements.add(new Conflit(img));
+        evenements.add(new Epidemie(img));
+        evenements.add(new Epidemie(img));
+    }
 
+    public static Carte piocheCarteEvenement(int index){
+        return evenements.get(index);
+    }
+
+    public static Carte piocheCarteDeveloppement(int index, int numeroPioche) {
+        switch (numeroPioche){
+            case 1:
+                return tas1.get(index);
+            case 2:
+                return tas2.get(index);
+            case 3:
+                return tas3.get(index);
+            case 4:
+                return tas4.get(index);
+            case 5:
+                return tas5.get(index);
+            default:
+                return null;
+        }
     }
 }
