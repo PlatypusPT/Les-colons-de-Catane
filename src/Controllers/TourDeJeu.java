@@ -21,11 +21,11 @@ public class TourDeJeu {
      */
 
     public static int lancerDeProduction(){
-        return ModelDe.lanceDe();
+        return ModelDe.lancerDeProduction();
     }
 
     public static String lanceDeEvenement(){
-        return ModelDe.getAction();
+        return ModelDe.lancerDeEvenement();
     }
 
     public static void tireCarteFondation(){
