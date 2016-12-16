@@ -79,4 +79,16 @@ public class Joueur {
 			col2.setTerrains(i, (Terrain) principaute.get(i+2));
 		}
 	}
+
+	public ArrayList<Carte> getMain(){
+	    return main;
+    }
+
+    public ArrayList<Carte> getPrincipaute(){
+	    return principaute;
+    }
+
+    public void ajouterCarteMain(Carte carte){
+	    main.add(carte);
+    }
 }

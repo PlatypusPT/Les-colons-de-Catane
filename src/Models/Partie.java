@@ -9,8 +9,8 @@ import java.util.Random;
 
 public class Partie {
 
-    private Joueur joueur1;
-    private Joueur joueur2;
+    private static Joueur joueur1;
+    private static Joueur joueur2;
     private ArrayList<Carte> pioche;
     private Random random;
     private static ArrayList<Carte> tas1;
@@ -153,6 +153,28 @@ public class Partie {
                 return tas4.get(index);
             case 5:
                 return tas5.get(index);
+            default:
+                return null;
+        }
+    }
+
+    public static ArrayList<Carte> getMainJoueur(int i){
+        switch (i){
+            case 1:
+                return joueur1.getMain();
+            case 2:
+                return joueur2.getMain();
+            default:
+                return null;
+        }
+    }
+
+    public static ArrayList<Carte> getPrincipauteJoueur(int i){
+        switch (i){
+            case 1:
+                return joueur1.getPrincipaute();
+            case 2:
+                return joueur2.getPrincipaute();
             default:
                 return null;
         }
