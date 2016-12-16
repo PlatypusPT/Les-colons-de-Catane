@@ -158,8 +158,25 @@ public class Partie {
         }
     }
 
-    public static ArrayList<Carte> getMainJoueur(int i){
-        switch (i){
+    public static ArrayList<Carte> getTasDeveloppement(int i){
+        switch (i) {
+            case 1:
+                return tas1;
+            case 2:
+                return tas2;
+            case 3:
+                return tas3;
+            case 4:
+                return tas4;
+            case 5:
+                return tas5;
+            default:
+                return null;
+        }
+    }
+
+    public static ArrayList<Carte> getMainJoueur(int index){
+        switch (index){
             case 1:
                 return joueur1.getMain();
             case 2:
@@ -169,8 +186,8 @@ public class Partie {
         }
     }
 
-    public static ArrayList<Carte> getPrincipauteJoueur(int i){
-        switch (i){
+    public static ArrayList<Carte> getPrincipauteJoueur(int index){
+        switch (index){
             case 1:
                 return joueur1.getPrincipaute();
             case 2:
