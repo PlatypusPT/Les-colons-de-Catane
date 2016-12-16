@@ -9,6 +9,7 @@ abstract public class Carte {
     protected int nbPointsVictoire; //nb de points de victoire que rapporte this carte
     protected int nbPointsCommerce; //nb de points de commerce que rapporte this carte
     protected String image; //image de la carte
+    protected int x,y;
 
     public Carte(int nbPointsVictoire, int nbPointsCommerce, String image){
         this.nbPointsVictoire = nbPointsVictoire;
@@ -31,4 +32,6 @@ abstract public class Carte {
     public void setNbPointsCommerce(int nbPointsCommerce){
         this.nbPointsCommerce = nbPointsCommerce;
     }
+
+    public String getImage() {return image;}
 }

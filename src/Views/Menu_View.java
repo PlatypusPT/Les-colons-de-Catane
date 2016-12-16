@@ -1,8 +1,9 @@
 package Views;
 
+import Models.ModelMenu;
 import Models.Partie;
 import Models.Joueur;
-import Models.Model;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -20,10 +21,11 @@ import java.util.ArrayList;
 
 /**
  * Created by yhaffner on 21/11/16.
+ *
  */
 public class Menu_View{
-    private Stage stage;
-    private Model model;
+    public Stage stage;
+    private ModelMenu model;
 
     private VBox menuSection;
     public Button startButton;
@@ -41,7 +43,7 @@ public class Menu_View{
     public Button realStartButton;
     public Button continueButton;
 
-    public Menu_View(Model model, Stage stage) {
+    public Menu_View(ModelMenu model, Stage stage) {
         this.model = model;
         this.stage = stage;
 
@@ -52,7 +54,7 @@ public class Menu_View{
 
     private void firstTimeInitAttribute() {
         stage.setTitle("Les princes de Catane");
-        stage.getIcons().add(new Image(new File(model.ASSETS_PATH+"/img/icon.png").toURI().toString()));
+        stage.getIcons().add(new Image(new File(ModelMenu.ASSETS_PATH +"/img/icon.png").toURI().toString()));
         stage.centerOnScreen();
         stage.setResizable(false);
 
@@ -65,7 +67,7 @@ public class Menu_View{
 
     private void initAttributs() {
         stage.getScene().getStylesheets().clear();
-        stage.getScene().getStylesheets().add(new File(model.ASSETS_PATH+"/css/menu_view.css").toURI().toString());
+        stage.getScene().getStylesheets().add(new File(ModelMenu.ASSETS_PATH +"/css/menu_view.css").toURI().toString());
 
         // Instanciate menu :3
         menuSection = new VBox();
@@ -90,7 +92,7 @@ public class Menu_View{
         blasonsIMGJ = new ArrayList<>();
         for(int i=0;i<Joueur.COULEURS.length;i++) {
             blasonsIMGJ.add(new RadioButton());
-            blasonsIMGJ.get(i).setGraphic(new ImageView(new Image(new File(model.ASSETS_PATH+"/img/blasons/"+ Joueur.COULEURS[i]+"_shield.png").toURI().toString(),60,60,true,true)));
+            blasonsIMGJ.get(i).setGraphic(new ImageView(new Image(new File(ModelMenu.ASSETS_PATH +"/img/blasons/"+ Joueur.COULEURS[i]+"_shield.png").toURI().toString(),60,60,true,true)));
         }
         for(RadioButton rb:blasonsIMGJ) rb.setToggleGroup(groupJ);
         blasonsIMGJ.get(0).setSelected(true);
@@ -107,7 +109,7 @@ public class Menu_View{
     }
 
     public void setWidgetAskFirstPlayer() {
-        stage.hide();
+        stage.getScene().getRoot().setVisible(false);
         ((BorderPane) stage.getScene().getRoot()).getChildren().clear();
         menuSection.getChildren().clear();
         blasonsJ.getChildren().clear();
@@ -119,11 +121,11 @@ public class Menu_View{
         menuSection.getChildren().add(blasonsJ);
         menuSection.getChildren().add(continueButton);
         ((BorderPane) stage.getScene().getRoot()).setCenter(menuSection);
-        stage.show();
+        stage.getScene().getRoot().setVisible(true);
     }
 
     public void setWidgetAskSecondPlayer() {
-        stage.hide();
+        stage.getScene().getRoot().setVisible(false);
         ((BorderPane) stage.getScene().getRoot()).getChildren().clear();
         menuSection.getChildren().clear();
         blasonsJ.getChildren().clear();
@@ -135,14 +137,7 @@ public class Menu_View{
         menuSection.getChildren().add(blasonsJ);
         menuSection.getChildren().add(realStartButton);
         ((BorderPane) stage.getScene().getRoot()).setCenter(menuSection);
-        stage.show();
-    }
-
-
-    public void startGame(Partie partie){
-        if(game_view==null) game_view=new Game_View(model,stage,this);
-        game_view.initAttributs();
-        game_view.setPartyView();
+        stage.getScene().getRoot().setVisible(true);
     }
 
     public void setController(EventHandler<ActionEvent> control_menu) {

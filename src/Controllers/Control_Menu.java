@@ -1,9 +1,11 @@
 package Controllers;
 
 import Models.Joueur;
-import Models.Model;
+import Models.ModelMenu;
 import Models.Partie;
+import Views.Game_View;
 import Views.Menu_View;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.RadioButton;
@@ -12,13 +14,13 @@ import javafx.scene.control.RadioButton;
  * Created by yhaffner on 21/11/16.
  */
 public class Control_Menu implements EventHandler<ActionEvent>{
-    private Menu_View view;
-    private Model model;
+    protected Menu_View view;
+    private ModelMenu model;
 
     private String j1,j2;
     private int c1,c2;
 
-    public Control_Menu(Model model, Menu_View view) {
+    public Control_Menu(ModelMenu model, Menu_View view) {
         this.model = model;
         this.view = view;
         view.setController(this);
@@ -45,7 +47,11 @@ public class Control_Menu implements EventHandler<ActionEvent>{
             else j2 = view.jnomTextField.getText();
             for (RadioButton rb:view.blasonsIMGJ) if(rb.isSelected()) c2=i; else i++;
 
-            view.startGame(new Partie(new Joueur(j1,c1),new Joueur(j2,c2)));
+            //game_view=new Game_View(new Partie(new Joueur(j1,c1),new Joueur(j2,c2)),view.stage,this);
+            Control_Game control_game = new Control_Game(
+                    new Partie(new Joueur(j1,c1),new Joueur(j2,c2)),
+                    this
+            );
         }
     }
 }
