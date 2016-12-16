@@ -4,7 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class ModelDe {
 
-	private static String deEvent[] = {"Tournoi de Chevaliers", "Puissance marchande", "Attaque de voleur","Anne faste","Carte enenement", "Face inconnue"};
+	private static String deEvent[] = {"Tournoi de Chevaliers", "Puissance marchande", "Attaque de voleur","Anne faste","Carte enenement", "Carte evenement"};
 
 	/*
 	Lancé du dé de production
