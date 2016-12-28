@@ -29,4 +29,5 @@
 .body {
     -fx-alignment: center;
     -fx-background-image: url('../img/menu.jpg');
+    -fx-font-family: "";
 }
