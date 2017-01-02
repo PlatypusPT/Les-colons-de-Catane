@@ -9,16 +9,16 @@ import java.util.Random;
 
 public class Partie {
 
-    private static Joueur joueur1;
-    private static Joueur joueur2;
+    private Joueur joueur1;
+    private Joueur joueur2;
     private ArrayList<Carte> pioche;
     private Random random;
-    private static ArrayList<Carte> tas1;
-    private static ArrayList<Carte> tas2;
-    private static ArrayList<Carte> tas3;
-    private static ArrayList<Carte> tas4;
-    private static ArrayList<Carte> tas5;
-    private static ArrayList<Carte> evenements;
+    private ArrayList<Carte> tas1;
+    private ArrayList<Carte> tas2;
+    private ArrayList<Carte> tas3;
+    private ArrayList<Carte> tas4;
+    private ArrayList<Carte> tas5;
+    private ArrayList<Carte> evenements;
 
     public Partie(Joueur joueur1, Joueur joueur2){
         this.joueur1 = joueur1;
@@ -137,11 +137,11 @@ public class Partie {
         evenements.add(new Epidemie(img));
     }
 
-    public static Carte piocheCarteEvenement(int index){
+    public Carte piocheCarteEvenement(int index){
         return evenements.get(index);
     }
 
-    public static Carte piocheCarteDeveloppement(int index, int numeroPioche) {
+    public Carte piocheCarteDeveloppement(int index, int numeroPioche) {
         switch (numeroPioche){
             case 1:
                 return tas1.get(index);
@@ -158,7 +158,7 @@ public class Partie {
         }
     }
 
-    public static ArrayList<Carte> getTasDeveloppement(int i){
+    public ArrayList<Carte> getTasDeveloppement(int i){
         switch (i) {
             case 1:
                 return tas1;
@@ -175,7 +175,7 @@ public class Partie {
         }
     }
 
-    public static ArrayList<Carte> getMainJoueur(int index){
+    public ArrayList<Carte> getMainJoueur(int index){
         switch (index){
             case 1:
                 return joueur1.getMain();
@@ -186,7 +186,7 @@ public class Partie {
         }
     }
 
-    public static ArrayList<Carte> getPrincipauteJoueur(int index){
+    public ArrayList<Carte> getPrincipauteJoueur(int index){
         switch (index){
             case 1:
                 return joueur1.getPrincipaute();

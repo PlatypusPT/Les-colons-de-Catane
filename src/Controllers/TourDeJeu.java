@@ -32,11 +32,11 @@ public class TourDeJeu {
         //code
     }
 
-    public static void tireCarteEvenement(int index){
+    /*public static void tireCarteEvenement(int index){
         Partie.piocheCarteEvenement(index);
     }
 
     public static void tireCarteDeveloppement(int index, int numeroPioche){
         Partie.piocheCarteDeveloppement(index, numeroPioche);
-    }
+    }*/
 }

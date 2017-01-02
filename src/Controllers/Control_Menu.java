@@ -37,6 +37,8 @@ public class Control_Menu implements EventHandler<ActionEvent>{
             if(view.jnomTextField.getText().replaceAll(" ", "").length() == 0) j1 = "J1";
             else j1 = view.jnomTextField.getText();
             for (RadioButton rb:view.blasonsIMGJ) if(rb.isSelected()) c1=i; else i++;
+            if(view.blasonsIMGJ.get(0).isSelected()) view.blasonsIMGJ.get(1).setSelected(true);
+            else view.blasonsIMGJ.get(0).setSelected(true);
             view.blasonsIMGJ.get(c1).setDisable(true);
             view.setWidgetAskSecondPlayer();
 
