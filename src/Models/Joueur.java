@@ -8,8 +8,8 @@ public class Joueur {
 	private String nom; //nom du joueur #groscommentaire
 	private int nbPointsVictoire; //nombre de PV du joueur. maximum : 12
 	private int couleurBlason; //noir ou rouge
-	private ArrayList<Carte> principaute;
-	private ArrayList<Carte> main;
+	public ArrayList<Carte> principaute;
+	public ArrayList<Carte> main;
     public final static String[] COULEURS = {"jaune","rouge","vert","bleu","magenta","blanc"};
 
 	public Joueur(String nom, int couleurBlason) {
@@ -17,17 +17,7 @@ public class Joueur {
 		this.couleurBlason = couleurBlason;
 		nbPointsVictoire = 0;
 		principaute = new ArrayList<>();
-		principaute.add(new Terrain("Blé", 1, 1,null));
-		principaute.add(new Terrain("Fer", 1, 2,null));
-		principaute.add(new Terrain("Laine", 1, 3,null));
-		principaute.add(new Terrain("Bois", 1, 4,null));
-		principaute.add(new Terrain("Argile", 1, 5,null));
-		principaute.add(new Terrain("Or", 1, 6,null));
-		principaute.add(new Colonie(null));
-		principaute.add(new Colonie(null));
-		principaute.add(new Route(null));
-		setRoute();
-		setTerrains();
+		setColoniesAttributs();
         main = new ArrayList<>();
 	}
 
@@ -64,19 +54,25 @@ public class Joueur {
 		return couleurBlason;
 	}
 
-	public void setRoute(){
-		Colonie col1 = (Colonie) principaute.get(6);
-		col1.setRte1((Route) principaute.get(8));
-		Colonie col2 = (Colonie) principaute.get(7);
-		col2.setRte2((Route) principaute.get(8));
-	}
+	public void setColoniesAttributs(){
+		for(int i=0;i<principaute.size();i++) {
+			Carte c = principaute.get(i);
+			if(c instanceof Colonie) {
+				if(principaute.get(i-1)!=null && principaute.get(i-1) instanceof Route)
+					((Colonie) c).setRte1((Route) principaute.get(i-1));
+				if(principaute.get(i+1)!=null && principaute.get(i+1) instanceof Route)
+					((Colonie) c).setRte2((Route) principaute.get(i+1));
 
-	public void setTerrains(){
-		Colonie col1 = (Colonie) principaute.get(6);
-		Colonie col2 = (Colonie) principaute.get(7);
-		for (int i=0; i<4; i++){
-			col1.setTerrains(i, (Terrain) principaute.get(i));
-			col2.setTerrains(i, (Terrain) principaute.get(i+2));
+
+				if(principaute.get(i-(principaute.size()/3)-1)!=null && principaute.get(i-(principaute.size()/3)-1) instanceof Terrain)
+					((Colonie) c).setTerrains(0,(Terrain) principaute.get(i-(principaute.size()/3)-1));
+				if(principaute.get(i-(principaute.size()/3)+1)!=null && principaute.get(i-(principaute.size()/3)+1) instanceof Terrain)
+					((Colonie) c).setTerrains(1,(Terrain) principaute.get(i-(principaute.size()/3)+1));
+				if(principaute.get(i+(principaute.size()/3)-1)!=null && principaute.get(i+(principaute.size()/3)-1) instanceof Terrain)
+					((Colonie) c).setTerrains(2,(Terrain) principaute.get(i+(principaute.size()/3)-1));
+				if(principaute.get(i+(principaute.size()/3)+1)!=null && principaute.get(i+(principaute.size()/3)+1) instanceof Terrain)
+					((Colonie) c).setTerrains(3,(Terrain) principaute.get(i+(principaute.size()/3)+1));
+			}
 		}
 	}
 

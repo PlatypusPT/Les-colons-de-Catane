@@ -43,6 +43,7 @@ public class Game_View {
     private HashMap<Point,ImageView> piocheCards;
     private HashMap<Point,ImageView> secondPlayerPlayedCards;
     private HashMap<Point,ImageView> secondPlayerDeck;
+    private Image empty_card;
 
     public Game_View(Partie model, Stage stage) {
         this.model = model;
@@ -74,6 +75,12 @@ public class Game_View {
         secondPlayerPlayedCards = new HashMap<>();
         secondPlayerDeck = new HashMap<>();
 
+        empty_card = new Image(
+                new File(ModelMenu.ASSETS_PATH+"/img/cards/no_card.png").toURI().toString(),
+                IMG_SMALL_SIZE,IMG_SMALL_SIZE,
+                true,true
+        );
+
         actualizeCards();
     }
 
@@ -84,66 +91,80 @@ public class Game_View {
         secondPlayerPlayedCards.clear();
         secondPlayerDeck.clear();
 
-        /* MODELE???
-        for(int i=0;i<model.getFirstPlayerPlayedCards().size();i++) {
-            ImageView imageView = new ImageView(model.getFirstPlayerPlayedCards().get(i).getImage());
-            firstPlayerPlayedCards.add(i,imageView);
-        }
-        for(int i=0;i<model.getFirstPlayerDeck().size();i++) {
-            ImageView imageView = new ImageView(model.getFirstPlayerDeck().get(i).getImage());
-            firstPlayerPlayedCards.add(i,imageView);
-        }
-        for(int i=0;i<model.getPiocheCards().size();i++) {
-            ImageView imageView = new ImageView(model.getPiocheCards().get(i).getImage());
-            firstPlayerPlayedCards.add(i,imageView);
-        }
-        for(int i=0;i<model.getSecondPlayerPlayedCards().size();i++) {
-            ImageView imageView = new ImageView(model.getSecondPlayerPlayedCards().get(i).getImage());
-            firstPlayerPlayedCards.add(i,imageView);
-        }
-        for(int i=0;i<model.getSecondPlayerDeck().size();i++) {
-            ImageView imageView = new ImageView(model.getSecondPlayerDeck().get(i).getImage());
-            firstPlayerPlayedCards.add(i,imageView);
-        }*/
-
-        Image dos = new Image(new File(ModelMenu.ASSETS_PATH+"/img/cards/card_dos.png").toURI().toString(),IMG_SMALL_SIZE,IMG_SMALL_SIZE,true,true);
-        Image emplacement = new Image(new File(ModelMenu.ASSETS_PATH+"/img/cards/no_card.png").toURI().toString(),IMG_SMALL_SIZE,IMG_SMALL_SIZE,true,true);
-        Image visible1 = new Image(new File(ModelMenu.ASSETS_PATH+"/img/cards/card_action_01.png").toURI().toString(),IMG_MEDIUM_SIZE,IMG_MEDIUM_SIZE,true,true);
-        Image visible2 = new Image(new File(ModelMenu.ASSETS_PATH+"/img/cards/card_action_02.png").toURI().toString(),IMG_MEDIUM_SIZE,IMG_MEDIUM_SIZE,true,true);
-        firstPlayerPlayedCards.put(new Point(0,0),new ImageView(dos));
-        firstPlayerPlayedCards.put(new Point(1,0),new ImageView(emplacement));
-        firstPlayerPlayedCards.put(new Point(2,0),new ImageView(dos));
-        firstPlayerPlayedCards.put(new Point(3,0),new ImageView(emplacement));
-        firstPlayerPlayedCards.put(new Point(4,0),new ImageView(dos));
-        firstPlayerPlayedCards.put(new Point(0,1),new ImageView(emplacement));
-        firstPlayerPlayedCards.put(new Point(1,1),new ImageView(dos));
-        firstPlayerPlayedCards.put(new Point(2,1),new ImageView(dos));
-        firstPlayerPlayedCards.put(new Point(3,1),new ImageView(dos));
-        firstPlayerPlayedCards.put(new Point(4,1),new ImageView(emplacement));
-        firstPlayerPlayedCards.put(new Point(0,2),new ImageView(dos));
-        firstPlayerPlayedCards.put(new Point(1,2),new ImageView(emplacement));
-        firstPlayerPlayedCards.put(new Point(2,2),new ImageView(dos));
-        firstPlayerPlayedCards.put(new Point(3,2),new ImageView(emplacement));
-        firstPlayerPlayedCards.put(new Point(4,2),new ImageView(dos));
-        for(int i=0;i<5;i++) firstPlayerDeck.put(new Point(i,0),new ImageView(visible1));
-        for(int i=0;i<10;i++) piocheCards.put(new Point(i,0),new ImageView(dos));
-        for(int i=0;i<5;i++) secondPlayerDeck.put(new Point(i,0),new ImageView(visible2));
-        secondPlayerPlayedCards.put(new Point(0,0),new ImageView(dos));
-        secondPlayerPlayedCards.put(new Point(1,0),new ImageView(emplacement));
-        secondPlayerPlayedCards.put(new Point(2,0),new ImageView(dos));
-        secondPlayerPlayedCards.put(new Point(3,0),new ImageView(emplacement));
-        secondPlayerPlayedCards.put(new Point(4,0),new ImageView(dos));
-        secondPlayerPlayedCards.put(new Point(0,1),new ImageView(emplacement));
-        secondPlayerPlayedCards.put(new Point(1,1),new ImageView(dos));
-        secondPlayerPlayedCards.put(new Point(2,1),new ImageView(dos));
-        secondPlayerPlayedCards.put(new Point(3,1),new ImageView(dos));
-        secondPlayerPlayedCards.put(new Point(4,1),new ImageView(emplacement));
-        secondPlayerPlayedCards.put(new Point(0,2),new ImageView(dos));
-        secondPlayerPlayedCards.put(new Point(1,2),new ImageView(emplacement));
-        secondPlayerPlayedCards.put(new Point(2,2),new ImageView(dos));
-        secondPlayerPlayedCards.put(new Point(3,2),new ImageView(emplacement));
-        secondPlayerPlayedCards.put(new Point(4,2),new ImageView(dos));
-
+        for(int i=0;i<model.getPrincipauteJoueur(1).size();i++)
+            if(model.getPrincipauteJoueur(1).get(i)!=null) firstPlayerPlayedCards.put(
+                    new Point(
+                            i%(model.getPrincipauteJoueur(1).size()/3),
+                            i/(model.getPrincipauteJoueur(1).size()/3)
+                    ),
+                    new ImageView(new Image(
+                            new File(model.getPrincipauteJoueur(1).get(i).getImage()).toURI().toString(),
+                            IMG_SMALL_SIZE,IMG_SMALL_SIZE,
+                            true,true
+                    ))
+            );
+            else firstPlayerPlayedCards.put(
+                    new Point(
+                            i%(model.getPrincipauteJoueur(1).size()/3),
+                            i/(model.getPrincipauteJoueur(1).size()/3)
+                    ),
+                    new ImageView(empty_card)
+            );
+        for(int i=0;i<model.getMainJoueur(1).size();i++)
+            firstPlayerDeck.put(
+                    new Point(i,0),
+                    new ImageView(new Image(
+                            new File(model.getMainJoueur(1).get(i).getImage()).toURI().toString(),
+                            IMG_MEDIUM_SIZE,IMG_MEDIUM_SIZE,
+                            true,true
+                    ))
+            );
+        for(int i=0;i<model.getPrincipauteJoueur(2).size();i++)
+            if(model.getPrincipauteJoueur(2).get(i)!=null) secondPlayerPlayedCards.put(
+                    new Point(
+                            i%(model.getPrincipauteJoueur(2).size()/3),
+                            i/(model.getPrincipauteJoueur(2).size()/3)
+                    ),
+                    new ImageView(new Image(
+                            new File(model.getPrincipauteJoueur(2).get(i).getImage()).toURI().toString(),
+                            IMG_SMALL_SIZE,IMG_SMALL_SIZE,
+                            true,true
+                    ))
+            );
+            else secondPlayerPlayedCards.put(
+                    new Point(
+                            i%(model.getPrincipauteJoueur(2).size()/3),
+                            i/(model.getPrincipauteJoueur(2).size()/3)
+                    ),
+                    new ImageView(empty_card)
+            );
+        for(int i=0;i<model.getMainJoueur(2).size();i++)
+            secondPlayerDeck.put(
+                    new Point(i,0),
+                    new ImageView(new Image(
+                            new File(model.getMainJoueur(2).get(i).getImage()).toURI().toString(),
+                            IMG_MEDIUM_SIZE,IMG_MEDIUM_SIZE,
+                            true,true
+                    ))
+            );
+        for(int i=0;i<6;i++)
+            piocheCards.put(
+                    new Point(i,0),
+                    new ImageView(new Image(
+                            new File(ModelMenu.ASSETS_PATH+"/img/cards/card_dos_"+(i+1)+".png").toURI().toString(),
+                            IMG_SMALL_SIZE,IMG_SMALL_SIZE,
+                            true,true
+                    ))
+            );
+        for(int i=6;i<10;i++)
+            piocheCards.put(
+                    new Point(i,0),
+                    new ImageView(new Image(
+                            new File(ModelMenu.ASSETS_PATH+"/img/cards/card_dos_6.png").toURI().toString(),
+                            IMG_SMALL_SIZE,IMG_SMALL_SIZE,
+                            true,true
+                    ))
+            );
 
 
         stage.getScene().getRoot().setVisible(false);
