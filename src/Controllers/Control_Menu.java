@@ -41,7 +41,6 @@ public class Control_Menu implements EventHandler<ActionEvent>{
             else view.blasonsIMGJ.get(0).setSelected(true);
             view.blasonsIMGJ.get(c1).setDisable(true);
             view.setWidgetAskSecondPlayer();
-
         }
 
         if(view.realStartButton.equals(event.getSource())) {

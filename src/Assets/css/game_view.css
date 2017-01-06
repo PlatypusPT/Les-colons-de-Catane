@@ -8,6 +8,12 @@
     -fx-alignment: top-center;
 }
 
+#plateau-layout {
+    -fx-max-height: 550px;
+    -fx-pref-height: 550px;
+    -fx-min-height: 550px;
+}
+
 .body {
     -fx-background-image: url('../img/background.png');
 }
@@ -25,4 +31,10 @@
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
     -fx-scale-z: 1.1;
+}
+
+#popup {
+    -fx-background-color: rgba(0,0,0,0.6);
+    -fx-padding: 1em;
+    -fx-translate-y: -40em;
 }

@@ -4,7 +4,9 @@ import Models.Partie;
 import Views.Game_View;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+
 
 /**
  * Created by yhaffner on 15/12/16.
@@ -25,6 +27,10 @@ public class Control_Game implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent event) {
-        System.out.println("You clicked on an image");
+        if(view.close.equals(event.getSource())) view.showInsideWindow(false);
+        else {
+            view.showImage(((ImageView) event.getSource()).getImage().impl_getUrl().split(":")[1], 0);
+            view.showInsideWindow(true);
+        }
     }
 }

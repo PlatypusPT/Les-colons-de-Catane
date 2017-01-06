@@ -4,15 +4,17 @@ import Controllers.Control_Game;
 import Models.ModelMenu;
 import Models.Partie;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.awt.*;
+import java.awt.Point;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,6 +39,7 @@ public class Game_View {
     private GridPane secondPlayerPlayedCardsLayout;
     private GridPane secondPlayerDeckLayout;
     private GridPane firstPlayerDeckLayout;
+    private BorderPane popup;
 
     private HashMap<Point,ImageView> firstPlayerPlayedCards;
     private HashMap<Point,ImageView> firstPlayerDeck;
@@ -44,6 +47,9 @@ public class Game_View {
     private HashMap<Point,ImageView> secondPlayerPlayedCards;
     private HashMap<Point,ImageView> secondPlayerDeck;
     private Image empty_card;
+
+    public Button close;
+
 
     public Game_View(Partie model, Stage stage) {
         this.model = model;
@@ -80,6 +86,11 @@ public class Game_View {
                 IMG_SMALL_SIZE,IMG_SMALL_SIZE,
                 true,true
         );
+        popup = new BorderPane();
+        popup.setId("popup");
+
+        close = new Button("X");
+        close.setId("close");
 
         actualizeCards();
     }
@@ -214,6 +225,23 @@ public class Game_View {
         stage.getScene().getRoot().setVisible(true);
     }
 
+    public void showInsideWindow(boolean visibility){
+        stage.getScene().getRoot().setVisible(false);
+        if(visibility) gameSection.getChildren().add(popup); else gameSection.getChildren().remove(popup);
+        stage.getScene().getRoot().setVisible(true);
+    }
+
+    public void showImage(String img_path, int action_type){
+        popup.setCenter(
+                new ImageView(new Image(
+                        new File(img_path).toURI().toString(),
+                        IMG_HUGE_SIZE,IMG_HUGE_SIZE,
+                        true,true
+                ))
+        );
+        popup.setRight(close);
+    }
+
     public void setController(EventHandler<MouseEvent> eh){
         for(Map.Entry<Point, ImageView> e : firstPlayerPlayedCards.entrySet())
             e.getValue().setOnMouseClicked(eh);
@@ -225,5 +253,6 @@ public class Game_View {
             e.getValue().setOnMouseClicked(eh);
         for(Map.Entry<Point, ImageView> e : secondPlayerDeck.entrySet())
             e.getValue().setOnMouseClicked(eh);
+        close.setOnMouseClicked(eh);
     }
 }

@@ -24,6 +24,8 @@ public class Partie {
     private ArrayList<Carte> colonies;
     private ArrayList<Carte> ville;
 
+    public int turn;
+
     public Partie(Joueur joueur1, Joueur joueur2){
         this.joueur1 = joueur1;
         this.joueur2 = joueur2;
@@ -44,6 +46,7 @@ public class Partie {
         initTas();
         initEvenement();
         initFondation();
+        turn = 0;
     }
 
     private void initFondation() {
