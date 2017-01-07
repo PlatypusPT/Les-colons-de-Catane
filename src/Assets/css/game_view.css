@@ -34,7 +34,20 @@
 }
 
 #popup {
-    -fx-background-color: rgba(0,0,0,0.6);
+    -fx-background-color: rgb(0,0,0);
     -fx-padding: 1em;
+    -fx-pref-width: 50em;
+    -fx-max-width: 50em;
+    -fx-min-width: 50em;
+    -fx-alignment: top-center;
+    -fx-effect: dropshadow(two-pass-box, black, 10, 0.1, 10, 10);
     -fx-translate-y: -40em;
+    -fx-translate-x: 1.2em;
+}
+
+#close {
+    -fx-border-color: rgb(255, 255, 255);
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-progress-color: rgb(255, 255, 255);
+    -fx-font-weight: 700;
 }

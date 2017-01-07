@@ -1,6 +1,7 @@
 package Views;
 
 import Controllers.Control_Game;
+import Models.Carte;
 import Models.ModelMenu;
 import Models.Partie;
 import javafx.event.EventHandler;
@@ -26,7 +27,7 @@ import java.util.Map;
 public class Game_View {
     public static int IMG_SMALL_SIZE = 64;
     public static int IMG_MEDIUM_SIZE = 100;
-    public static int IMG_HUGE_SIZE = 400;
+    public static int IMG_HUGE_SIZE = 500;
 
 
     private Partie model;
@@ -46,6 +47,7 @@ public class Game_View {
     private HashMap<Point,ImageView> piocheCards;
     private HashMap<Point,ImageView> secondPlayerPlayedCards;
     private HashMap<Point,ImageView> secondPlayerDeck;
+    public HashMap<ImageView, Carte> allCards;
     private Image empty_card;
 
     public Button close;
@@ -80,6 +82,7 @@ public class Game_View {
         piocheCards = new HashMap<>();
         secondPlayerPlayedCards = new HashMap<>();
         secondPlayerDeck = new HashMap<>();
+        allCards = new HashMap<>();
 
         empty_card = new Image(
                 new File(ModelMenu.ASSETS_PATH+"/img/cards/no_card.png").toURI().toString(),
@@ -102,71 +105,76 @@ public class Game_View {
         secondPlayerPlayedCards.clear();
         secondPlayerDeck.clear();
 
-        for(int i=0;i<model.getPrincipauteJoueur(1).size();i++)
-            if(model.getPrincipauteJoueur(1).get(i)!=null) firstPlayerPlayedCards.put(
-                    new Point(
-                            i%(model.getPrincipauteJoueur(1).size()/3),
-                            i/(model.getPrincipauteJoueur(1).size()/3)
-                    ),
-                    new ImageView(new Image(
+        ImageView imageView;
+        for(int i=0;i<model.getPrincipauteJoueur(1).size();i++) {
+            if (model.getPrincipauteJoueur(1).get(i) != null) imageView = new ImageView(new Image(
                             new File(model.getPrincipauteJoueur(1).get(i).getImage()).toURI().toString(),
-                            IMG_SMALL_SIZE,IMG_SMALL_SIZE,
-                            true,true
-                    ))
+                            IMG_SMALL_SIZE, IMG_SMALL_SIZE,
+                            true, true
+                    )
             );
-            else firstPlayerPlayedCards.put(
+            else imageView = new ImageView(empty_card);
+            if(model.getPrincipauteJoueur(1).get(i)!=null)
+                allCards.put(imageView, model.getPrincipauteJoueur(1).get(i));
+            firstPlayerPlayedCards.put(
                     new Point(
-                            i%(model.getPrincipauteJoueur(1).size()/3),
-                            i/(model.getPrincipauteJoueur(1).size()/3)
+                            i % (model.getPrincipauteJoueur(1).size() / 3),
+                            i / (model.getPrincipauteJoueur(1).size() / 3)
                     ),
-                    new ImageView(empty_card)
+                    imageView
             );
-        for(int i=0;i<model.getMainJoueur(1).size();i++)
+        }
+        for(int i=0;i<model.getMainJoueur(1).size();i++) {
+            imageView = new ImageView(new Image(
+                    new File(model.getMainJoueur(1).get(i).getImage()).toURI().toString(),
+                    IMG_MEDIUM_SIZE, IMG_MEDIUM_SIZE,
+                    true, true
+            ));
+            allCards.put(imageView, model.getMainJoueur(1).get(i));
             firstPlayerDeck.put(
-                    new Point(i,0),
-                    new ImageView(new Image(
-                            new File(model.getMainJoueur(1).get(i).getImage()).toURI().toString(),
-                            IMG_MEDIUM_SIZE,IMG_MEDIUM_SIZE,
-                            true,true
-                    ))
+                    new Point(i, 0),
+                    imageView
             );
-        for(int i=0;i<model.getPrincipauteJoueur(2).size();i++)
-            if(model.getPrincipauteJoueur(2).get(i)!=null) secondPlayerPlayedCards.put(
-                    new Point(
-                            i%(model.getPrincipauteJoueur(2).size()/3),
-                            i/(model.getPrincipauteJoueur(2).size()/3)
-                    ),
-                    new ImageView(new Image(
+        }
+        for(int i=0;i<model.getPrincipauteJoueur(2).size();i++) {
+            if (model.getPrincipauteJoueur(2).get(i) != null)
+                imageView = new ImageView(new Image(
                             new File(model.getPrincipauteJoueur(2).get(i).getImage()).toURI().toString(),
-                            IMG_SMALL_SIZE,IMG_SMALL_SIZE,
-                            true,true
-                    ))
-            );
-            else secondPlayerPlayedCards.put(
+                            IMG_SMALL_SIZE, IMG_SMALL_SIZE,
+                            true, true
+                ));
+            else imageView = new ImageView(empty_card);
+            if(model.getPrincipauteJoueur(2).get(i)!=null) allCards.put(imageView,model.getPrincipauteJoueur(2).get(i));
+            secondPlayerPlayedCards.put(
                     new Point(
-                            i%(model.getPrincipauteJoueur(2).size()/3),
-                            i/(model.getPrincipauteJoueur(2).size()/3)
+                            i % (model.getPrincipauteJoueur(2).size() / 3),
+                            i / (model.getPrincipauteJoueur(2).size() / 3)
                     ),
-                    new ImageView(empty_card)
+                    imageView
             );
-        for(int i=0;i<model.getMainJoueur(2).size();i++)
+        }
+        for(int i=0;i<model.getMainJoueur(2).size();i++) {
+            imageView = new ImageView(new Image(
+                    new File(model.getMainJoueur(2).get(i).getImage()).toURI().toString(),
+                    IMG_MEDIUM_SIZE, IMG_MEDIUM_SIZE,
+                    true, true
+            ));
+            allCards.put(imageView, model.getMainJoueur(2).get(i));
             secondPlayerDeck.put(
-                    new Point(i,0),
-                    new ImageView(new Image(
-                            new File(model.getMainJoueur(2).get(i).getImage()).toURI().toString(),
-                            IMG_MEDIUM_SIZE,IMG_MEDIUM_SIZE,
-                            true,true
-                    ))
+                    new Point(i, 0),
+                    imageView
             );
-        for(int i=0;i<6;i++)
+        }
+        for(int i=0;i<6;i++) {
             piocheCards.put(
-                    new Point(i,0),
+                    new Point(i, 0),
                     new ImageView(new Image(
-                            new File(ModelMenu.ASSETS_PATH+"/img/cards/card_dos_"+(i+1)+".png").toURI().toString(),
-                            IMG_SMALL_SIZE,IMG_SMALL_SIZE,
-                            true,true
+                            new File(ModelMenu.ASSETS_PATH + "/img/cards/card_dos_" + (i + 1) + ".png").toURI().toString(),
+                            IMG_SMALL_SIZE, IMG_SMALL_SIZE,
+                            true, true
                     ))
             );
+        }
         for(int i=6;i<10;i++)
             piocheCards.put(
                     new Point(i,0),
