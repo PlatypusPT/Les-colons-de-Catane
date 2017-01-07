@@ -6,6 +6,7 @@ import Models.ModelMenu;
 import Models.Partie;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -40,17 +41,19 @@ public class Game_View {
     private GridPane secondPlayerPlayedCardsLayout;
     private GridPane secondPlayerDeckLayout;
     private GridPane firstPlayerDeckLayout;
-    private BorderPane popup;
+    private GridPane IMGButtonGroup;
 
+    private BorderPane popup;
     private HashMap<Point,ImageView> firstPlayerPlayedCards;
     private HashMap<Point,ImageView> firstPlayerDeck;
     private HashMap<Point,ImageView> piocheCards;
     private HashMap<Point,ImageView> secondPlayerPlayedCards;
     private HashMap<Point,ImageView> secondPlayerDeck;
     public HashMap<ImageView, Carte> allCards;
-    private Image empty_card;
 
+    private Image empty_card;
     public Button close;
+    private Label nothingToShow;
 
 
     public Game_View(Partie model, Stage stage) {
@@ -76,24 +79,28 @@ public class Game_View {
         secondPlayerPlayedCardsLayout.setId("second-player-layout");
         secondPlayerDeckLayout = new GridPane();
         secondPlayerDeckLayout.setId("second-player-deck");
+        IMGButtonGroup = new GridPane();
+        IMGButtonGroup.setId("button-group");
 
         firstPlayerPlayedCards = new HashMap<>();
         firstPlayerDeck = new HashMap<>();
         piocheCards = new HashMap<>();
         secondPlayerPlayedCards = new HashMap<>();
         secondPlayerDeck = new HashMap<>();
-        allCards = new HashMap<>();
 
-        empty_card = new Image(
-                new File(ModelMenu.ASSETS_PATH+"/img/cards/no_card.png").toURI().toString(),
-                IMG_SMALL_SIZE,IMG_SMALL_SIZE,
-                true,true
-        );
+                empty_card = new Image(
+                        new File(ModelMenu.ASSETS_PATH+"/img/cards/no_card.png").toURI().toString(),
+                        IMG_SMALL_SIZE,IMG_SMALL_SIZE,
+                        true,true
+                );
+        allCards = new HashMap<>();
         popup = new BorderPane();
         popup.setId("popup");
 
         close = new Button("X");
         close.setId("close");
+        nothingToShow = new Label("Il n'y a rien à faire avec cette carte.");
+        nothingToShow.setId("nothing-to-show");
 
         actualizeCards();
     }
@@ -201,7 +208,7 @@ public class Game_View {
         stage.getScene().getRoot().setVisible(true);
     }
 
-    public void setFirstPlayerView(){
+    public void setFirstPlayerView(int mode){
         stage.getScene().getRoot().setVisible(false);
 
         ((BorderPane) stage.getScene().getRoot()).getChildren().clear();
@@ -217,7 +224,7 @@ public class Game_View {
         stage.getScene().getRoot().setVisible(true);
     }
 
-    public void setSecondPlayerView(){
+    public void setSecondPlayerView(int mode){
         stage.getScene().getRoot().setVisible(false);
 
         ((BorderPane) stage.getScene().getRoot()).getChildren().clear();
@@ -233,13 +240,14 @@ public class Game_View {
         stage.getScene().getRoot().setVisible(true);
     }
 
-    public void showInsideWindow(boolean visibility){
+    public void showImage(String img_path, int mode){
         stage.getScene().getRoot().setVisible(false);
-        if(visibility) gameSection.getChildren().add(popup); else gameSection.getChildren().remove(popup);
-        stage.getScene().getRoot().setVisible(true);
-    }
 
-    public void showImage(String img_path, int action_type){
+        ((BorderPane) stage.getScene().getRoot()).getChildren().clear();
+        popup.getChildren().clear();
+        IMGButtonGroup.getChildren().clear();
+
+        // Game content
         popup.setCenter(
                 new ImageView(new Image(
                         new File(img_path).toURI().toString(),
@@ -248,6 +256,17 @@ public class Game_View {
                 ))
         );
         popup.setRight(close);
+
+
+        switch(mode){
+            default:
+                IMGButtonGroup.add(nothingToShow,0,0);
+        }
+        popup.setBottom(IMGButtonGroup);
+
+        ((BorderPane) stage.getScene().getRoot()).setCenter(popup);
+
+        stage.getScene().getRoot().setVisible(true);
     }
 
     public void setController(EventHandler<MouseEvent> eh){

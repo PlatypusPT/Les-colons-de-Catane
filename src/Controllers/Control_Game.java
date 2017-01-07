@@ -1,5 +1,6 @@
 package Controllers;
 
+import Models.Carte;
 import Models.Partie;
 import Views.Game_View;
 import javafx.event.ActionEvent;
@@ -22,15 +23,17 @@ public class Control_Game implements EventHandler<MouseEvent> {
         this.menu = control_menu;
         this.view.setController(this);
 
-        view.setFirstPlayerView();
+        view.setFirstPlayerView(0);
     }
 
     @Override
     public void handle(MouseEvent event) {
-        if(view.close.equals(event.getSource())) view.showInsideWindow(false);
-        else {
+        if(view.close.equals(event.getSource())) view.setFirstPlayerView(0);
+        else if(view.allCards.containsKey((ImageView) event.getSource())) {
+            Carte c = view.allCards.get(event.getSource());
+            //if(c instanceof )
             view.showImage(((ImageView) event.getSource()).getImage().impl_getUrl().split(":")[1], 0);
-            view.showInsideWindow(true);
         }
+        else view.showImage(((ImageView) event.getSource()).getImage().impl_getUrl().split(":")[1], 0);
     }
 }
