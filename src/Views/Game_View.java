@@ -2,6 +2,7 @@ package Views;
 
 import Controllers.Control_Game;
 import Models.Carte;
+import Models.ModelDe;
 import Models.ModelMenu;
 import Models.Partie;
 import javafx.event.EventHandler;
@@ -32,7 +33,7 @@ public class Game_View {
 
 
     private Partie model;
-    private Stage stage;
+    public Stage stage;
     private Menu_View menu_view;
 
     private VBox gameSection;
@@ -51,9 +52,11 @@ public class Game_View {
     private HashMap<Point,ImageView> secondPlayerDeck;
     public HashMap<ImageView, Carte> allCards;
 
+    private ImageView[][] des;
     private Image empty_card;
     public Button close;
     private Label nothingToShow;
+    public Button launchDe;
 
 
     public Game_View(Partie model, Stage stage) {
@@ -99,9 +102,18 @@ public class Game_View {
 
         close = new Button("X");
         close.setId("close");
+        launchDe = new Button("");
+        launchDe.getStyleClass().add("popup-button");
         nothingToShow = new Label("Il n'y a rien à faire avec cette carte.");
         nothingToShow.setId("nothing-to-show");
 
+        des = new ImageView[2][6];
+        for(int i=0;i<2;i++) for(int j=0;j<6-(i*2+j)/6;j++)
+            des[i][j]=new ImageView(new Image(
+                    new File(ModelMenu.ASSETS_PATH+"/img/des/de"+i+"_face"+j+".png").toURI().toString(),
+                    IMG_MEDIUM_SIZE,IMG_MEDIUM_SIZE,
+                    true,true
+            ));
         actualizeCards();
     }
 
@@ -137,6 +149,7 @@ public class Game_View {
                     IMG_MEDIUM_SIZE, IMG_MEDIUM_SIZE,
                     true, true
             ));
+            imageView.getStyleClass().add("main");
             allCards.put(imageView, model.getMainJoueur(1).get(i));
             firstPlayerDeck.put(
                     new Point(i, 0),
@@ -166,6 +179,7 @@ public class Game_View {
                     IMG_MEDIUM_SIZE, IMG_MEDIUM_SIZE,
                     true, true
             ));
+            imageView.getStyleClass().add("main");
             allCards.put(imageView, model.getMainJoueur(2).get(i));
             secondPlayerDeck.put(
                     new Point(i, 0),
@@ -173,25 +187,28 @@ public class Game_View {
             );
         }
         for(int i=0;i<6;i++) {
+            imageView = new ImageView(new Image(
+                    new File(ModelMenu.ASSETS_PATH + "/img/cards/card_dos_" + (i + 1) + ".png").toURI().toString(),
+                    IMG_SMALL_SIZE, IMG_SMALL_SIZE,
+                    true, true
+            ));
+            imageView.getStyleClass().add("pioche");
             piocheCards.put(
                     new Point(i, 0),
-                    new ImageView(new Image(
-                            new File(ModelMenu.ASSETS_PATH + "/img/cards/card_dos_" + (i + 1) + ".png").toURI().toString(),
-                            IMG_SMALL_SIZE, IMG_SMALL_SIZE,
-                            true, true
-                    ))
+                    imageView
             );
         }
-        for(int i=6;i<10;i++)
+        for(int i=6;i<10;i++) {
+            imageView = new ImageView(new Image(
+                    new File(ModelMenu.ASSETS_PATH + "/img/cards/card_dos_6.png").toURI().toString(),
+                    IMG_SMALL_SIZE, IMG_SMALL_SIZE,
+                    true, true
+            ));
+            imageView.getStyleClass().add("pioche");
             piocheCards.put(
-                    new Point(i,0),
-                    new ImageView(new Image(
-                            new File(ModelMenu.ASSETS_PATH+"/img/cards/card_dos_6.png").toURI().toString(),
-                            IMG_SMALL_SIZE,IMG_SMALL_SIZE,
-                            true,true
-                    ))
-            );
-
+                    new Point(i, 0),
+                    imageView);
+        }
 
         stage.getScene().getRoot().setVisible(false);
         firstPlayerPlayedCardsLayout.getChildren().clear();
@@ -259,9 +276,33 @@ public class Game_View {
 
 
         switch(mode){
+            case 1:
+                System.out.println("IT'S A DECK");
+                break;
+            case 2:
+                System.out.println("IT'S A PIOCHE");
+                break;
             default:
                 IMGButtonGroup.add(nothingToShow,0,0);
         }
+        popup.setBottom(IMGButtonGroup);
+
+        ((BorderPane) stage.getScene().getRoot()).setCenter(popup);
+
+        stage.getScene().getRoot().setVisible(true);
+    }
+
+    public void launchDe(int id_face, int de, String msg_button) {
+        stage.getScene().getRoot().setVisible(false);
+
+        ((BorderPane) stage.getScene().getRoot()).getChildren().clear();
+        popup.getChildren().clear();
+        IMGButtonGroup.getChildren().clear();
+
+        // Game content
+        popup.setCenter(des[de][id_face]);
+        launchDe.setText(msg_button);
+        IMGButtonGroup.add(launchDe,0,0);
         popup.setBottom(IMGButtonGroup);
 
         ((BorderPane) stage.getScene().getRoot()).setCenter(popup);
@@ -281,5 +322,7 @@ public class Game_View {
         for(Map.Entry<Point, ImageView> e : secondPlayerDeck.entrySet())
             e.getValue().setOnMouseClicked(eh);
         close.setOnMouseClicked(eh);
+        launchDe.setOnMouseClicked(eh);
+        stage.getScene().setOnMouseClicked(eh);
     }
 }

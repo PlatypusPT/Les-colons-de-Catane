@@ -25,6 +25,8 @@ public class Partie {
     private ArrayList<Carte> ville;
 
     public int turn;
+    public boolean deLance;
+    public int actualDe;
 
     public Partie(Joueur joueur1, Joueur joueur2){
         this.joueur1 = joueur1;
@@ -47,6 +49,8 @@ public class Partie {
         initEvenement();
         initFondation();
         turn = 0;
+        deLance = false;
+        actualDe = 1;
     }
 
     private void initFondation() {

@@ -24,14 +24,6 @@ public class TourDeJeu {
         return ModelDe.lancerDeProduction();
     }
 
-    public static String lanceDeEvenement(){
-        return ModelDe.lancerDeEvenement();
-    }
-
-    public static void tireCarteFondation(){
-        //code
-    }
-
     /*public static void tireCarteEvenement(int index){
         Partie.piocheCarteEvenement(index);
     }
