@@ -42,7 +42,8 @@ public class Control_Game implements EventHandler<MouseEvent> {
     public void handle(MouseEvent event) {
         System.out.println(view.launchDe.getText());
         if(view.close.equals(event.getSource())) view.setFirstPlayerView(0);
-        else if(view.launchDe.getText().equals(((Text) event.getPickResult().getIntersectedNode()).getText())
+        else if((event.getPickResult().getIntersectedNode() instanceof Text &&
+                view.launchDe.getText().equals(((Text) event.getPickResult().getIntersectedNode()).getText()))
                         || view.launchDe.equals(event.getSource())) {
             if(view.launchDe.getText().equals("Continuer")) {
                 model.actualDe = (model.actualDe+1)%2;
