@@ -1,9 +1,6 @@
 package Controllers;
 
-import Models.Carte;
-import Models.Joueur;
-import Models.ModelDe;
-import Models.Partie;
+import Models.*;
 import Views.Game_View;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -77,10 +74,19 @@ public class Control_Game implements EventHandler<MouseEvent> {
                 view.launchDe.setText("Continuer");
             }
         } else if (view.actionImageFocus.equals(event.getSource())) {
+            Joueur j = model.turn == 0 ? model.joueur1 : model.joueur2;
             if (view.actionImageFocus.getText().equals("Utiliser carte")) {
+                if(view.allCards.get(view.onFocusIMG) instanceof DeveloppementColonie) {
+                    if (model.turn == 0) view.setFirstPlayerView(2);
+                    else view.setSecondPlayerView(2);
+                } else if(view.allCards.get(view.onFocusIMG) instanceof DeveloppementVille) {
+                    if (model.turn == 0) view.setFirstPlayerView(3);
+                    else view.setSecondPlayerView(3);
+                } else if(view.allCards.get(view.onFocusIMG) instanceof Evenement||
+                        view.allCards.get(view.onFocusIMG) instanceof Action) {
 
+                }
             } else {
-                Joueur j = model.turn == 0 ? model.joueur1 : model.joueur2;
                 model.actualPioche = view.bufferedActualPioche;
                 for (int i = 0; i < model.getTasDeveloppement(model.actualPioche).size(); i++)
                     if (model.getTasDeveloppement(model.actualPioche).get(i).equals(view.allCards.get(view.onFocusIMG))) {

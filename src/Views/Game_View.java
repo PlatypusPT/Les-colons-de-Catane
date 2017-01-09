@@ -208,9 +208,11 @@ public class Game_View {
         for(int i=6;i<10;i++) {
             imageView = new ImageView(new Image(
                     new File(ModelMenu.ASSETS_PATH + "/img/cards/card_dos_6.png").toURI().toString(),
-                    IMG_SMALL_SIZE, IMG_SMALL_SIZE,
+                    IMG_HUGE_SIZE, IMG_HUGE_SIZE,
                     true, true
             ));
+            imageView.setFitHeight(IMG_SMALL_SIZE);
+            imageView.setFitWidth(IMG_SMALL_SIZE);
             imageView.getStyleClass().add("pioche");
             imageView.setId(i+"");
             piocheCards.put(
@@ -225,6 +227,8 @@ public class Game_View {
                     IMG_MEDIUM_SIZE, IMG_MEDIUM_SIZE,
                     true, true
             ));
+            imageView.setFitHeight(IMG_SMALL_SIZE);
+            imageView.setFitWidth(IMG_SMALL_SIZE);
             allCards.put(imageView, model.getTasDeveloppement(j).get(i));
         }
         for(i=0;i<model.ressources.size();i++) allCards.put(new ImageView(new Image(new File(model.ressources.get(i).getImage()).toURI().toString(), IMG_SMALL_SIZE, IMG_SMALL_SIZE, true, true)), model.ressources.get(i));
@@ -311,7 +315,7 @@ public class Game_View {
         stage.getScene().getRoot().setVisible(true);
     }
 
-    public void showImage(ImageView iv, int mode){
+    public void showImage(ImageView iv, int mode) {
         onFocusIMG = iv;
 
         stage.getScene().getRoot().setVisible(false);
@@ -321,12 +325,33 @@ public class Game_View {
         IMGButtonGroup.getChildren().clear();
 
         // Game content
-        ImageView imv = new ImageView(new Image(
-                new File(iv.getImage().impl_getUrl().split(":")[1]).toURI().toString(),
-                IMG_HUGE_SIZE,IMG_HUGE_SIZE,
-                true,true
-        ));
-        imv.setRotate(iv.getRotate());
+        ImageView imv = null;
+        if (piocheLayout.getChildren().contains(iv) && model.actualPioche<0) {
+            for(Map.Entry<Point,ImageView> e:piocheCards.entrySet())
+                if(e.getValue().equals(iv)){
+                    if(e.getKey().x<6)
+                        imv = new ImageView(new Image(
+                                new File(ModelMenu.ASSETS_PATH + "/img/cards/card_dos_" + (e.getKey().x + 1) + ".png").toURI().toString(),
+                                IMG_HUGE_SIZE, IMG_HUGE_SIZE,
+                                true, true
+                        ));
+                    else
+                        imv = new ImageView(new Image(
+                                new File(ModelMenu.ASSETS_PATH + "/img/cards/card_dos_6.png").toURI().toString(),
+                                IMG_HUGE_SIZE, IMG_HUGE_SIZE,
+                                true, true
+                        ));
+                }
+
+            popup.setCenter(iv);
+        }else {
+            imv = new ImageView(new Image(
+                    new File(allCards.get(iv).getImage()).toURI().toString(),
+                    IMG_HUGE_SIZE, IMG_HUGE_SIZE,
+                    true, true
+            ));
+            imv.setRotate(iv.getRotate());
+        }
         popup.setCenter(imv);
         popup.setRight(close);
 
