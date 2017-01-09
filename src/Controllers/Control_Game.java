@@ -1,21 +1,21 @@
 package Controllers;
 
 import Models.Carte;
+import Models.Joueur;
 import Models.ModelDe;
 import Models.Partie;
 import Views.Game_View;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.awt.*;
+import java.util.Map;
 
 
 /**
@@ -33,26 +33,30 @@ public class Control_Game implements EventHandler<MouseEvent> {
         this.menu = control_menu;
         this.view.setController(this);
 
-
-
-        view.launchDe(ModelDe.lancerDeEvenement(),model.actualDe,"Lancer le dé");
+        view.setFirstPlayerView(0);
     }
 
     @Override
     public void handle(MouseEvent event) {
-        System.out.println(view.launchDe.getText());
-        if(view.close.equals(event.getSource())) view.setFirstPlayerView(0);
-        else if((event.getPickResult().getIntersectedNode() instanceof Text &&
+        if (view.close.equals(event.getSource())) {
+            if(model.actualPioche<1) {
+                if (model.turn == 0) view.setFirstPlayerView(0);
+                else view.setSecondPlayerView(0);
+            } else view.showCards(model.actualPioche);
+        } else if ((event.getPickResult().getIntersectedNode() instanceof Text &&
                 view.launchDe.getText().equals(((Text) event.getPickResult().getIntersectedNode()).getText()))
-                        || view.launchDe.equals(event.getSource())) {
-            if(view.launchDe.getText().equals("Continuer")) {
-                model.actualDe = (model.actualDe+1)%2;
-                if(model.actualDe==0)
-                    view.launchDe(ModelDe.lancerDeProduction(),model.actualDe,"Lancer le dé");
-                else
-                    if(model.turn==0) view.setFirstPlayerView(0);
+                || view.launchDe.equals(event.getSource())) {
+            if (view.launchDe.getText().equals("Continuer")) {
+                model.actualDe = (model.actualDe + 1) % 2;
+                if (model.actualDe == 0) {
+                    view.launchDe(ModelDe.lancerDeProduction(), model.actualDe, "Lancer le dé");
+                } else {
+                    model.addRessources(view.actualDeResult);
+                    view.turnCardsAfterDice(model.turn);
+                    if (model.turn == 0) view.setFirstPlayerView(0);
                     else view.setSecondPlayerView(0);
-            } else if(!model.deLance) {
+                }
+            } else if (!model.deLance) {
                 model.deLance = true;
                 t = new Timeline(new KeyFrame(
                         Duration.millis(10),
@@ -64,13 +68,34 @@ public class Control_Game implements EventHandler<MouseEvent> {
                 model.deLance = false;
                 view.launchDe.setText("Continuer");
             }
-        } else if(!view.stage.getScene().equals(event.getSource())){
+        } else if(view.actionImageFocus.equals(event.getSource())) {
+            Joueur j = model.turn==0?model.joueur1:model.joueur2;
+                model.actualPioche = view.bufferedActualPioche;
+                for (int i = 0; i < model.getTasDeveloppement(model.actualPioche).size(); i++)
+                    if (model.getTasDeveloppement(model.actualPioche).get(i).equals(view.allCards.get(view.onFocusIMG))) {
+                        for (Map.Entry<ImageView, Carte> e : view.allCards.entrySet())
+                            if (e.getValue().equals(model.getTasDeveloppement(model.actualPioche).get(i)))
+                                if (model.turn == 0)
+                                    view.firstPlayerDeck.put(new Point(view.firstPlayerDeck.size(), 0), e.getKey());
+                                else view.secondPlayerDeck.put(new Point(view.secondPlayerDeck.size(), 0), e.getKey());
+                        j.main.add(model.getTasDeveloppement(model.actualPioche).remove(i));
+                    }
+            if(j.main.size()<3) {
+                view.showCards(model.actualPioche);
+            } else {
+                //for(ImageView imageView:model.turn==0?view.firstPlayerDeck.values():view.secondPlayerDeck.values())
+                    //imageView.setOnMouseClicked(this);
+                model.actualPioche=-1;
+                view.launchDe(ModelDe.lancerDeEvenement(),model.actualDe,"Lancer le dé");
+            }
+        } else if (!view.stage.getScene().equals(event.getSource())) {
             ImageView carte = (ImageView) event.getSource();
-            if(carte.getStyleClass().get(carte.getStyleClass().size()-2).equals("pioche"))
-                view.showImage(((ImageView) event.getSource()).getImage().impl_getUrl().split(":")[1], 2);
-            else if(carte.getStyleClass().get(carte.getStyleClass().size()-2).equals("main"))
-                view.showImage(((ImageView) event.getSource()).getImage().impl_getUrl().split(":")[1], 1);
-            else view.showImage(((ImageView) event.getSource()).getImage().impl_getUrl().split(":")[1], 0);
+            if (carte.getStyleClass().size()>=2 && carte.getStyleClass().get(carte.getStyleClass().size() - 2).equals("pioche")) {
+                view.bufferedActualPioche = Integer.parseInt(carte.getId()) - 4;
+                view.showImage((ImageView) event.getSource(), 2);
+            } else if (carte.getStyleClass().size()>=2 && carte.getStyleClass().get(carte.getStyleClass().size() - 2).equals("main"))
+                view.showImage((ImageView) event.getSource(), 1);
+            else view.showImage((ImageView) event.getSource(), 0);
         }
     }
 

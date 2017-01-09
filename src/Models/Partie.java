@@ -9,8 +9,8 @@ import java.util.Random;
 
 public class Partie {
 
-    private Joueur joueur1;
-    private Joueur joueur2;
+    public Joueur joueur1;
+    public Joueur joueur2;
     private ArrayList<Carte> pioche;
     private Random random;
     private ArrayList<Carte> tas1;
@@ -19,14 +19,16 @@ public class Partie {
     private ArrayList<Carte> tas4;
     private ArrayList<Carte> tas5;
     private ArrayList<Carte> evenements;
-    private ArrayList<Carte> ressources;
-    private ArrayList<Carte> routes;
-    private ArrayList<Carte> colonies;
-    private ArrayList<Carte> ville;
+    public ArrayList<Carte> ressources;
+    public ArrayList<Carte> routes;
+    public ArrayList<Carte> colonies;
+    public ArrayList<Carte> ville;
 
     public int turn;
     public boolean deLance;
     public int actualDe;
+    public int actualPioche;
+    public boolean firstTurn;
 
     public Partie(Joueur joueur1, Joueur joueur2){
         this.joueur1 = joueur1;
@@ -51,6 +53,8 @@ public class Partie {
         turn = 0;
         deLance = false;
         actualDe = 1;
+        actualPioche = -1;
+        firstTurn = true;
     }
 
     private void initFondation() {
@@ -187,9 +191,6 @@ public class Partie {
         for (int i=0; i<12; i++) {
             tas5.add(pioche.remove(random.nextInt(pioche.size())));
         }
-        joueur1.main.add(tas1.remove(0));
-        joueur1.main.add(tas1.remove(0));
-        joueur1.main.add(tas1.remove(0));
     }
 
     private void initEvenement(){
@@ -266,5 +267,11 @@ public class Partie {
             default:
                 return null;
         }
+    }
+
+    public void addRessources(int actualDeResult) {
+        for (Carte c : turn == 0 ? joueur1.principaute : joueur2.principaute)
+            if (c instanceof Terrain) if (((Terrain) c).getNbRessource() < 3)
+                ((Terrain) c).setNbRessource(((Terrain) c).getNbRessource() + 1);
     }
 }

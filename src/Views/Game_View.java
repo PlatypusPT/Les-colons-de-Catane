@@ -1,10 +1,7 @@
 package Views;
 
 import Controllers.Control_Game;
-import Models.Carte;
-import Models.ModelDe;
-import Models.ModelMenu;
-import Models.Partie;
+import Models.*;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -44,20 +41,23 @@ public class Game_View {
     private GridPane firstPlayerDeckLayout;
     private GridPane IMGButtonGroup;
 
-    private BorderPane popup;
-    private HashMap<Point,ImageView> firstPlayerPlayedCards;
-    private HashMap<Point,ImageView> firstPlayerDeck;
+    public BorderPane popup;
+    public HashMap<Point,ImageView> firstPlayerPlayedCards;
+    public HashMap<Point,ImageView> firstPlayerDeck;
     private HashMap<Point,ImageView> piocheCards;
     private HashMap<Point,ImageView> secondPlayerPlayedCards;
-    private HashMap<Point,ImageView> secondPlayerDeck;
+    public HashMap<Point,ImageView> secondPlayerDeck;
     public HashMap<ImageView, Carte> allCards;
 
     private ImageView[][] des;
     private Image empty_card;
     public Button close;
-    private Label nothingToShow;
     public Button launchDe;
-
+    public Button actionImageFocus;
+    private Label nothingToShow;
+    public int actualDeResult;
+    public ImageView onFocusIMG;
+    public int bufferedActualPioche;
 
     public Game_View(Partie model, Stage stage) {
         this.model = model;
@@ -106,6 +106,8 @@ public class Game_View {
         launchDe.getStyleClass().add("popup-button");
         nothingToShow = new Label("Il n'y a rien à faire avec cette carte.");
         nothingToShow.setId("nothing-to-show");
+        actionImageFocus = new Button("");
+        actionImageFocus.getStyleClass().add("popup-button");
 
         des = new ImageView[2][6];
         for(int i=0;i<2;i++) for(int j=0;j<6-(i*2+j)/6;j++)
@@ -126,6 +128,7 @@ public class Game_View {
 
         ImageView imageView;
         for(int i=0;i<model.getPrincipauteJoueur(1).size();i++) {
+
             if (model.getPrincipauteJoueur(1).get(i) != null) imageView = new ImageView(new Image(
                             new File(model.getPrincipauteJoueur(1).get(i).getImage()).toURI().toString(),
                             IMG_SMALL_SIZE, IMG_SMALL_SIZE,
@@ -193,6 +196,7 @@ public class Game_View {
                     true, true
             ));
             imageView.getStyleClass().add("pioche");
+            imageView.setId(i+"");
             piocheCards.put(
                     new Point(i, 0),
                     imageView
@@ -205,24 +209,29 @@ public class Game_View {
                     true, true
             ));
             imageView.getStyleClass().add("pioche");
+            imageView.setId(i+"");
             piocheCards.put(
                     new Point(i, 0),
                     imageView);
         }
 
-        stage.getScene().getRoot().setVisible(false);
-        firstPlayerPlayedCardsLayout.getChildren().clear();
-        for(Map.Entry<Point, ImageView> e : firstPlayerPlayedCards.entrySet())
-            {firstPlayerPlayedCardsLayout.add(e.getValue(),e.getKey().x,e.getKey().y);e.getValue().getStyleClass().add("selectable");}
-        for(Map.Entry<Point, ImageView> e : firstPlayerDeck.entrySet())
-            {firstPlayerDeckLayout.add(e.getValue(),e.getKey().x,e.getKey().y);e.getValue().getStyleClass().add("selectable");}
-        for(Map.Entry<Point, ImageView> e : piocheCards.entrySet())
-            {piocheLayout.add(e.getValue(),e.getKey().x,e.getKey().y);e.getValue().getStyleClass().add("selectable");}
-        for(Map.Entry<Point, ImageView> e : secondPlayerPlayedCards.entrySet())
-            {secondPlayerPlayedCardsLayout.add(e.getValue(),e.getKey().x,e.getKey().y);e.getValue().getStyleClass().add("selectable");}
-        for(Map.Entry<Point, ImageView> e : secondPlayerDeck.entrySet())
-            {secondPlayerDeckLayout.add(e.getValue(),e.getKey().x,e.getKey().y);e.getValue().getStyleClass().add("selectable");}
-        stage.getScene().getRoot().setVisible(true);
+        int j,i;
+        for(j=1; j<6; j++) for(i=0;i<model.getTasDeveloppement(j).size();i++) {
+            imageView = new ImageView(new Image(
+                    new File(model.getTasDeveloppement(j).get(i).getImage()).toURI().toString(),
+                    IMG_MEDIUM_SIZE, IMG_MEDIUM_SIZE,
+                    true, true
+            ));
+            allCards.put(imageView, model.getTasDeveloppement(j).get(i));
+        }
+        for(i=0;i<model.ressources.size();i++) allCards.put(new ImageView(new Image(new File(model.ressources.get(i).getImage()).toURI().toString(), IMG_SMALL_SIZE, IMG_SMALL_SIZE, true, true)), model.ressources.get(i));
+        for(i=0;i<model.routes.size();i++) allCards.put(new ImageView(new Image(new File(model.routes.get(i).getImage()).toURI().toString(), IMG_SMALL_SIZE, IMG_SMALL_SIZE, true, true)), model.routes.get(i));
+        for(i=0;i<model.ville.size();i++) allCards.put(new ImageView(new Image(new File(model.ville.get(i).getImage()).toURI().toString(), IMG_SMALL_SIZE, IMG_SMALL_SIZE, true, true)), model.ville.get(i));
+        for(i=0;i<model.colonies.size();i++) allCards.put(new ImageView(new Image(new File(model.colonies.get(i).getImage()).toURI().toString(), IMG_SMALL_SIZE, IMG_SMALL_SIZE, true, true)), model.colonies.get(i));
+
+
+        for(Map.Entry<ImageView,Carte> e:allCards.entrySet()) e.getKey().getStyleClass().add("selectable");
+        for(Map.Entry<Point, ImageView> e : piocheCards.entrySet()) e.getValue().getStyleClass().add("selectable");
     }
 
     public void setFirstPlayerView(int mode){
@@ -230,6 +239,22 @@ public class Game_View {
 
         ((BorderPane) stage.getScene().getRoot()).getChildren().clear();
         gameSection.getChildren().clear();
+
+        firstPlayerPlayedCardsLayout.getChildren().clear();
+        firstPlayerDeckLayout.getChildren().clear();
+        piocheLayout.getChildren().clear();
+        secondPlayerPlayedCardsLayout.getChildren().clear();
+        secondPlayerDeckLayout.getChildren().clear();
+        for(Map.Entry<Point, ImageView> e : firstPlayerPlayedCards.entrySet())
+            firstPlayerPlayedCardsLayout.add(e.getValue(),e.getKey().x,e.getKey().y);
+        for(Map.Entry<Point, ImageView> e : firstPlayerDeck.entrySet())
+            firstPlayerDeckLayout.add(e.getValue(),e.getKey().x,e.getKey().y);
+        for(Map.Entry<Point, ImageView> e : piocheCards.entrySet())
+            piocheLayout.add(e.getValue(),e.getKey().x,e.getKey().y);
+        for(Map.Entry<Point, ImageView> e : secondPlayerPlayedCards.entrySet())
+            secondPlayerPlayedCardsLayout.add(e.getValue(),e.getKey().x,e.getKey().y);
+        for(Map.Entry<Point, ImageView> e : secondPlayerDeck.entrySet())
+            secondPlayerDeckLayout.add(e.getValue(),e.getKey().x,e.getKey().y);
 
         // Game content
         gameSection.getChildren().add(secondPlayerPlayedCardsLayout);
@@ -247,6 +272,24 @@ public class Game_View {
         ((BorderPane) stage.getScene().getRoot()).getChildren().clear();
         gameSection.getChildren().clear();
 
+        firstPlayerPlayedCardsLayout.getChildren().clear();
+        firstPlayerDeckLayout.getChildren().clear();
+        piocheLayout.getChildren().clear();
+        secondPlayerPlayedCardsLayout.getChildren().clear();
+        secondPlayerDeckLayout.getChildren().clear();
+        for(Map.Entry<Point, ImageView> e : firstPlayerPlayedCards.entrySet())
+            firstPlayerPlayedCardsLayout.add(e.getValue(),e.getKey().x,e.getKey().y);
+        for(Map.Entry<Point, ImageView> e : firstPlayerDeck.entrySet())
+            firstPlayerDeckLayout.add(e.getValue(),e.getKey().x,e.getKey().y);
+        for(Map.Entry<Point, ImageView> e : piocheCards.entrySet())
+            piocheLayout.add(e.getValue(),e.getKey().x,e.getKey().y);
+        for(Map.Entry<Point, ImageView> e : secondPlayerPlayedCards.entrySet())
+            secondPlayerPlayedCardsLayout.add(e.getValue(),e.getKey().x,e.getKey().y);
+        for(Map.Entry<Point, ImageView> e : secondPlayerDeck.entrySet())
+            secondPlayerDeckLayout.add(e.getValue(),e.getKey().x,e.getKey().y);
+
+
+
         // Game content
         gameSection.getChildren().add(firstPlayerPlayedCardsLayout);
         gameSection.getChildren().add(piocheLayout);
@@ -257,7 +300,9 @@ public class Game_View {
         stage.getScene().getRoot().setVisible(true);
     }
 
-    public void showImage(String img_path, int mode){
+    public void showImage(ImageView iv, int mode){
+        onFocusIMG = iv;
+
         stage.getScene().getRoot().setVisible(false);
 
         ((BorderPane) stage.getScene().getRoot()).getChildren().clear();
@@ -265,25 +310,31 @@ public class Game_View {
         IMGButtonGroup.getChildren().clear();
 
         // Game content
-        popup.setCenter(
-                new ImageView(new Image(
-                        new File(img_path).toURI().toString(),
-                        IMG_HUGE_SIZE,IMG_HUGE_SIZE,
-                        true,true
-                ))
-        );
+        ImageView imv = new ImageView(new Image(
+                new File(iv.getImage().impl_getUrl().split(":")[1]).toURI().toString(),
+                IMG_HUGE_SIZE,IMG_HUGE_SIZE,
+                true,true
+        ));
+        imv.setRotate(iv.getRotate());
+        popup.setCenter(imv);
         popup.setRight(close);
 
 
         switch(mode){
             case 1:
-                System.out.println("IT'S A DECK");
+                actionImageFocus.setText("Utiliser carte");
+                IMGButtonGroup.add(actionImageFocus,0,0);
                 break;
             case 2:
-                System.out.println("IT'S A PIOCHE");
+                actionImageFocus.setText("Piocher une carte");
+                IMGButtonGroup.add(actionImageFocus,0,0);
                 break;
             default:
-                IMGButtonGroup.add(nothingToShow,0,0);
+                if(model.actualPioche<1) IMGButtonGroup.add(nothingToShow,0,0);
+                else {
+                    actionImageFocus.setText("Selectionner carte");
+                    IMGButtonGroup.add(actionImageFocus, 0, 0);
+                }
         }
         popup.setBottom(IMGButtonGroup);
 
@@ -293,6 +344,7 @@ public class Game_View {
     }
 
     public void launchDe(int id_face, int de, String msg_button) {
+        actualDeResult = id_face;
         stage.getScene().getRoot().setVisible(false);
 
         ((BorderPane) stage.getScene().getRoot()).getChildren().clear();
@@ -310,19 +362,51 @@ public class Game_View {
         stage.getScene().getRoot().setVisible(true);
     }
 
+    public void showCards(int mode) {
+        stage.getScene().getRoot().setVisible(false);
+
+        ((BorderPane) stage.getScene().getRoot()).getChildren().clear();
+        popup.getChildren().clear();
+        piocheLayout.getChildren().clear();
+        IMGButtonGroup.getChildren().clear();
+
+        // Game content
+        ImageView imageView;
+        for (int i = 0; i < model.getTasDeveloppement(mode).size(); i++)
+            for (Map.Entry<ImageView, Carte> hm : allCards.entrySet())
+                    if (hm.getValue().equals(model.getTasDeveloppement(mode).get(i))) {
+                        hm.getKey().setFitHeight(IMG_MEDIUM_SIZE);
+                        hm.getKey().setFitWidth(IMG_MEDIUM_SIZE);
+                        piocheLayout.add(hm.getKey(), i/3, i%3);
+                    }
+
+        popup.setCenter(piocheLayout);
+
+        ((BorderPane) stage.getScene().getRoot()).setCenter(popup);
+
+        stage.getScene().getRoot().setVisible(true);
+    }
+
     public void setController(EventHandler<MouseEvent> eh){
-        for(Map.Entry<Point, ImageView> e : firstPlayerPlayedCards.entrySet())
-            e.getValue().setOnMouseClicked(eh);
-        for(Map.Entry<Point, ImageView> e : firstPlayerDeck.entrySet())
-            e.getValue().setOnMouseClicked(eh);
+        for(Map.Entry<ImageView,Carte> e:allCards.entrySet())
+            e.getKey().setOnMouseClicked(eh);
         for(Map.Entry<Point, ImageView> e : piocheCards.entrySet())
-            e.getValue().setOnMouseClicked(eh);
-        for(Map.Entry<Point, ImageView> e : secondPlayerPlayedCards.entrySet())
-            e.getValue().setOnMouseClicked(eh);
-        for(Map.Entry<Point, ImageView> e : secondPlayerDeck.entrySet())
             e.getValue().setOnMouseClicked(eh);
         close.setOnMouseClicked(eh);
         launchDe.setOnMouseClicked(eh);
         stage.getScene().setOnMouseClicked(eh);
+        actionImageFocus.setOnMouseClicked(eh);
+    }
+
+    public void turnCardsAfterDice(int turn) {
+        for (ImageView i : (turn == 0 ? firstPlayerPlayedCards.values() : secondPlayerPlayedCards.values())){
+            if (allCards.get(i) instanceof Terrain) {
+                System.out.println("\nFace dé: "+((Terrain) allCards.get(i)).getFaceDé());
+                System.out.println("Nb Ressources: "+((Terrain) allCards.get(i)).getNbRessource());
+                System.out.println("Dé actuel: "+(actualDeResult+1));
+                if (((Terrain) allCards.get(i)).getFaceDé() == actualDeResult+1 && ((Terrain) allCards.get(i)).getNbRessource() < 3)
+                    i.setRotate(i.getRotate() - 90);
+            }
+        }
     }
 }
