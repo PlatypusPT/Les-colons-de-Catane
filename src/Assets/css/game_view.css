@@ -78,3 +78,6 @@
 #close-button:hover {
   -fx-background-color: rgb(120,25,28);
 }
+.huge-focus {
+    -fx-border-color: rgb(255, 0, 0);
+}
