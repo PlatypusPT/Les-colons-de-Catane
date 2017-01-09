@@ -74,7 +74,7 @@ public class Menu_View{
         startButton = new Button("COMMENCER");
         startButton.setId("start-button");
         continueButton = new Button("CONTINUER");
-        continueButton.setId("real-start-button");
+        continueButton.setId("start-button-reduced");
         realStartButton = new Button("DÉMARRER LA PARTIE");
         realStartButton.setId("start-button-reduced");
         optionButton = new Button("OPTIONS");

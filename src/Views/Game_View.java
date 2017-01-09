@@ -356,6 +356,7 @@ public class Game_View {
         }
         popup.setCenter(imv);
         popup.setRight(close);
+        popup.setId("popup");
         close.setId("close-button");
         actionImageFocus.setId("popup-button");
 
@@ -393,6 +394,7 @@ public class Game_View {
         // Game content
         popup.setCenter(des[de][id_face]);
         launchDe.setText(msg_button);
+        launchDe.setId("popup-button");
         IMGButtonGroup.add(launchDe,0,0);
         popup.setBottom(IMGButtonGroup);
 
