@@ -1,7 +1,9 @@
 package Views;
 
-import Controllers.Control_Game;
-import Models.*;
+import Models.Carte;
+import Models.ModelMenu;
+import Models.Partie;
+import Models.Terrain;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,13 +12,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.awt.Point;
+import java.awt.*;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +27,6 @@ public class Game_View {
     public static int IMG_SMALL_SIZE = 64;
     public static int IMG_MEDIUM_SIZE = 100;
     public static int IMG_HUGE_SIZE = 500;
-    public static String HUGE_FOCUS = "huge-focus";
 
 
     private Partie model;
@@ -243,8 +242,6 @@ public class Game_View {
     }
 
     public void setFirstPlayerView(int mode){
-        higlightDevelopmentColoniesCase(mode==2);
-        higlightDevelopmentVilleCase(mode==3);
         stage.getScene().getRoot().setVisible(false);
 
         ((BorderPane) stage.getScene().getRoot()).getChildren().clear();
@@ -357,7 +354,8 @@ public class Game_View {
         }
         popup.setCenter(imv);
         popup.setRight(close);
-
+        close.setId("close-button");
+        actionImageFocus.setId("popup-button");
 
         switch(mode){
             case 1:
@@ -426,36 +424,6 @@ public class Game_View {
         stage.getScene().getRoot().setVisible(true);
     }
 
-    public void turnCardsAfterDice(int turn) {
-        for (ImageView i : (turn == 0 ? firstPlayerPlayedCards.values() : secondPlayerPlayedCards.values())){
-            if (allCards.get(i) instanceof Terrain) {
-                System.out.println("\nFace dé: "+((Terrain) allCards.get(i)).getFaceDé());
-                System.out.println("Nb Ressources: "+((Terrain) allCards.get(i)).getNbRessource());
-                System.out.println("Dé actuel: "+(actualDeResult+1));
-                if (((Terrain) allCards.get(i)).getFaceDé() == actualDeResult+1 && ((Terrain) allCards.get(i)).getNbRessource() < 3)
-                    i.setRotate(i.getRotate() - 90);
-            }
-        }
-    }
-    private void higlightDevelopmentVilleCase(boolean highlight) {
-        for(Map.Entry<Point,ImageView> e:(model.turn==0?firstPlayerPlayedCards.entrySet():secondPlayerPlayedCards.entrySet()))
-            if(e.getKey().x%2==1 && e.getKey().y%2==0) {
-                for (Map.Entry<Point, ImageView> e2 : (model.turn == 0 ? firstPlayerPlayedCards.entrySet() : secondPlayerPlayedCards.entrySet()))
-                    if (highlight && e2.getKey().y == 1 && e2.getKey().x == e.getKey().x && allCards.get(e2.getValue()) instanceof Ville)
-                        e.getValue().getStyleClass().add(HUGE_FOCUS);
-                    else e.getValue().getStyleClass().remove(HUGE_FOCUS);
-            }
-    }
-    private void higlightDevelopmentColoniesCase(boolean highlight) {
-        for(Map.Entry<Point,ImageView> e:(model.turn==0?firstPlayerPlayedCards.entrySet():secondPlayerPlayedCards.entrySet()))
-            if(e.getKey().x%2==1 && e.getKey().y%2==0) {
-                for (Map.Entry<Point, ImageView> e2 : (model.turn == 0 ? firstPlayerPlayedCards.entrySet() : secondPlayerPlayedCards.entrySet()))
-                    if (highlight && e2.getKey().y == 1 && e2.getKey().x == e.getKey().x && allCards.get(e2.getValue()) instanceof Colonie)
-                        e.getValue().getStyleClass().add(HUGE_FOCUS);
-                    else e.getValue().getStyleClass().remove(HUGE_FOCUS);
-            }
-    }
-
     public void setController(EventHandler<MouseEvent> eh){
         for(Map.Entry<ImageView,Carte> e:allCards.entrySet())
             e.getKey().setOnMouseClicked(eh);
@@ -466,5 +434,17 @@ public class Game_View {
         stage.getScene().setOnMouseClicked(eh);
         actionImageFocus.setOnMouseClicked(eh);
         endTurn.setOnMouseClicked(eh);
+    }
+
+    public void turnCardsAfterDice(int turn) {
+        for (ImageView i : (turn == 0 ? firstPlayerPlayedCards.values() : secondPlayerPlayedCards.values())){
+            if (allCards.get(i) instanceof Terrain) {
+                System.out.println("\nFace dé: "+((Terrain) allCards.get(i)).getFaceDé());
+                System.out.println("Nb Ressources: "+((Terrain) allCards.get(i)).getNbRessource());
+                System.out.println("Dé actuel: "+(actualDeResult+1));
+                if (((Terrain) allCards.get(i)).getFaceDé() == actualDeResult+1 && ((Terrain) allCards.get(i)).getNbRessource() < 3)
+                    i.setRotate(i.getRotate() - 90);
+            }
+        }
     }
 }

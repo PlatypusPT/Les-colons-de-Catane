@@ -1,9 +1,7 @@
 package Views;
 
-import Models.ModelMenu;
-import Models.Partie;
 import Models.Joueur;
-import javafx.application.Application;
+import Models.ModelMenu;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -78,7 +76,7 @@ public class Menu_View{
         continueButton = new Button("CONTINUER");
         continueButton.setId("real-start-button");
         realStartButton = new Button("DÉMARRER LA PARTIE");
-        realStartButton.setId("real-start-button");
+        realStartButton.setId("start-button-reduced");
         optionButton = new Button("OPTIONS");
         optionButton.setId("option-button");
 
