@@ -33,7 +33,7 @@ public class Control_Game implements EventHandler<MouseEvent> {
         this.menu = control_menu;
         this.view.setController(this);
 
-        view.setFirstPlayerView(0);
+        view.setFirstPlayerView(1);
     }
 
     @Override
@@ -90,10 +90,10 @@ public class Control_Game implements EventHandler<MouseEvent> {
             }
         } else if (!view.stage.getScene().equals(event.getSource())) {
             ImageView carte = (ImageView) event.getSource();
-            if (carte.getStyleClass().size()>=2 && carte.getStyleClass().get(carte.getStyleClass().size() - 2).equals("pioche")) {
+            if (view.piocheCards.containsValue(carte)) {
                 view.bufferedActualPioche = Integer.parseInt(carte.getId()) - 4;
                 view.showImage((ImageView) event.getSource(), 2);
-            } else if (carte.getStyleClass().size()>=2 && carte.getStyleClass().get(carte.getStyleClass().size() - 2).equals("main"))
+            } else if (view.firstPlayerDeck.containsValue(carte) || view.secondPlayerDeck.containsValue(carte))
                 view.showImage((ImageView) event.getSource(), 1);
             else view.showImage((ImageView) event.getSource(), 0);
         }

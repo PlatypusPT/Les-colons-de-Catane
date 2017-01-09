@@ -44,7 +44,7 @@ public class Game_View {
     public BorderPane popup;
     public HashMap<Point,ImageView> firstPlayerPlayedCards;
     public HashMap<Point,ImageView> firstPlayerDeck;
-    private HashMap<Point,ImageView> piocheCards;
+    public HashMap<Point,ImageView> piocheCards;
     private HashMap<Point,ImageView> secondPlayerPlayedCards;
     public HashMap<Point,ImageView> secondPlayerDeck;
     public HashMap<ImageView, Carte> allCards;
@@ -52,6 +52,7 @@ public class Game_View {
     private ImageView[][] des;
     private Image empty_card;
     public Button close;
+    public Button endTurn;
     public Button launchDe;
     public Button actionImageFocus;
     private Label nothingToShow;
@@ -102,6 +103,8 @@ public class Game_View {
 
         close = new Button("X");
         close.setId("close");
+        endTurn = new Button("Finir tour");
+        endTurn.setId("switch-turn");
         launchDe = new Button("");
         launchDe.getStyleClass().add("popup-button");
         nothingToShow = new Label("Il n'y a rien à faire avec cette carte.");
@@ -261,7 +264,12 @@ public class Game_View {
         gameSection.getChildren().add(piocheLayout);
         gameSection.getChildren().add(firstPlayerPlayedCardsLayout);
         ((BorderPane) stage.getScene().getRoot()).setCenter(gameSection);
-        ((BorderPane) stage.getScene().getRoot()).setBottom(firstPlayerDeckLayout);
+        BorderPane bp = new BorderPane();
+        bp.setCenter(firstPlayerDeckLayout);
+        if(mode==0){
+            bp.setRight(close);
+        }
+        ((BorderPane) stage.getScene().getRoot()).setBottom(bp);
 
         stage.getScene().getRoot().setVisible(true);
     }
