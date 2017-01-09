@@ -54,3 +54,7 @@
     -fx-progress-color: rgb(255, 255, 255);
     -fx-font-weight: 700;
 }
+
+.huge-focus {
+    -fx-border-color: rgb(255, 0, 0);
+}

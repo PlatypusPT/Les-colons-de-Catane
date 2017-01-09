@@ -27,6 +27,7 @@ public class Game_View {
     public static int IMG_SMALL_SIZE = 64;
     public static int IMG_MEDIUM_SIZE = 100;
     public static int IMG_HUGE_SIZE = 500;
+    public static String HUGE_FOCUS = "huge-focus";
 
 
     private Partie model;
@@ -242,6 +243,8 @@ public class Game_View {
     }
 
     public void setFirstPlayerView(int mode){
+        higlightDevelopmentColoniesCase(mode==2);
+        higlightDevelopmentVilleCase(mode==3);
         stage.getScene().getRoot().setVisible(false);
 
         ((BorderPane) stage.getScene().getRoot()).getChildren().clear();
@@ -423,18 +426,6 @@ public class Game_View {
         stage.getScene().getRoot().setVisible(true);
     }
 
-    public void setController(EventHandler<MouseEvent> eh){
-        for(Map.Entry<ImageView,Carte> e:allCards.entrySet())
-            e.getKey().setOnMouseClicked(eh);
-        for(Map.Entry<Point, ImageView> e : piocheCards.entrySet())
-            e.getValue().setOnMouseClicked(eh);
-        close.setOnMouseClicked(eh);
-        launchDe.setOnMouseClicked(eh);
-        stage.getScene().setOnMouseClicked(eh);
-        actionImageFocus.setOnMouseClicked(eh);
-        endTurn.setOnMouseClicked(eh);
-    }
-
     public void turnCardsAfterDice(int turn) {
         for (ImageView i : (turn == 0 ? firstPlayerPlayedCards.values() : secondPlayerPlayedCards.values())){
             if (allCards.get(i) instanceof Terrain) {
@@ -445,5 +436,35 @@ public class Game_View {
                     i.setRotate(i.getRotate() - 90);
             }
         }
+    }
+    private void higlightDevelopmentVilleCase(boolean highlight) {
+        for(Map.Entry<Point,ImageView> e:(model.turn==0?firstPlayerPlayedCards.entrySet():secondPlayerPlayedCards.entrySet()))
+            if(e.getKey().x%2==1 && e.getKey().y%2==0) {
+                for (Map.Entry<Point, ImageView> e2 : (model.turn == 0 ? firstPlayerPlayedCards.entrySet() : secondPlayerPlayedCards.entrySet()))
+                    if (highlight && e2.getKey().y == 1 && e2.getKey().x == e.getKey().x && allCards.get(e2.getValue()) instanceof Ville)
+                        e.getValue().getStyleClass().add(HUGE_FOCUS);
+                    else e.getValue().getStyleClass().remove(HUGE_FOCUS);
+            }
+    }
+    private void higlightDevelopmentColoniesCase(boolean highlight) {
+        for(Map.Entry<Point,ImageView> e:(model.turn==0?firstPlayerPlayedCards.entrySet():secondPlayerPlayedCards.entrySet()))
+            if(e.getKey().x%2==1 && e.getKey().y%2==0) {
+                for (Map.Entry<Point, ImageView> e2 : (model.turn == 0 ? firstPlayerPlayedCards.entrySet() : secondPlayerPlayedCards.entrySet()))
+                    if (highlight && e2.getKey().y == 1 && e2.getKey().x == e.getKey().x && allCards.get(e2.getValue()) instanceof Colonie)
+                        e.getValue().getStyleClass().add(HUGE_FOCUS);
+                    else e.getValue().getStyleClass().remove(HUGE_FOCUS);
+            }
+    }
+
+    public void setController(EventHandler<MouseEvent> eh){
+        for(Map.Entry<ImageView,Carte> e:allCards.entrySet())
+            e.getKey().setOnMouseClicked(eh);
+        for(Map.Entry<Point, ImageView> e : piocheCards.entrySet())
+            e.getValue().setOnMouseClicked(eh);
+        close.setOnMouseClicked(eh);
+        launchDe.setOnMouseClicked(eh);
+        stage.getScene().setOnMouseClicked(eh);
+        actionImageFocus.setOnMouseClicked(eh);
+        endTurn.setOnMouseClicked(eh);
     }
 }
