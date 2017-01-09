@@ -39,18 +39,17 @@ public class Control_Game implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent event) {
         if (view.close.equals(event.getSource())) {
-            if(model.actualPioche<1) {
+            if (model.actualPioche < 1) {
                 if (model.turn == 0) view.setFirstPlayerView(0);
                 else view.setSecondPlayerView(0);
             } else view.showCards(model.actualPioche);
         } else if (view.endTurn.equals(event.getSource())) {
-            model.turn = (model.turn+1)%2;
-            if(model.turn==0) {
-                if(model.firstTurn) model.firstTurn=false;
+            model.turn = (model.turn + 1) % 2;
+            if (model.turn == 0) {
+                if (model.firstTurn) model.firstTurn = false;
                 view.setFirstPlayerView(0);
-            }
-            else {
-                view.setSecondPlayerView(model.firstTurn?1:0);
+            } else {
+                view.setSecondPlayerView(model.firstTurn ? 1 : 0);
             }
         } else if ((event.getPickResult().getIntersectedNode() instanceof Text &&
                 view.launchDe.getText().equals(((Text) event.getPickResult().getIntersectedNode()).getText()))
@@ -77,8 +76,11 @@ public class Control_Game implements EventHandler<MouseEvent> {
                 model.deLance = false;
                 view.launchDe.setText("Continuer");
             }
-        } else if(view.actionImageFocus.equals(event.getSource())) {
-            Joueur j = model.turn==0?model.joueur1:model.joueur2;
+        } else if (view.actionImageFocus.equals(event.getSource())) {
+            if (view.actionImageFocus.getText().equals("Utiliser carte")) {
+
+            } else {
+                Joueur j = model.turn == 0 ? model.joueur1 : model.joueur2;
                 model.actualPioche = view.bufferedActualPioche;
                 for (int i = 0; i < model.getTasDeveloppement(model.actualPioche).size(); i++)
                     if (model.getTasDeveloppement(model.actualPioche).get(i).equals(view.allCards.get(view.onFocusIMG))) {
@@ -89,13 +91,14 @@ public class Control_Game implements EventHandler<MouseEvent> {
                                 else view.secondPlayerDeck.put(new Point(view.secondPlayerDeck.size(), 0), e.getKey());
                         j.main.add(model.getTasDeveloppement(model.actualPioche).remove(i));
                     }
-            if(j.main.size()<3) {
-                view.showCards(model.actualPioche);
-            } else {
-                //for(ImageView imageView:model.turn==0?view.firstPlayerDeck.values():view.secondPlayerDeck.values())
+                if (j.main.size() < 3) {
+                    view.showCards(model.actualPioche);
+                } else {
+                    //for(ImageView imageView:model.turn==0?view.firstPlayerDeck.values():view.secondPlayerDeck.values())
                     //imageView.setOnMouseClicked(this);
-                model.actualPioche=-1;
-                view.launchDe(ModelDe.lancerDeEvenement(),model.actualDe,"Lancer le dé");
+                    model.actualPioche = -1;
+                    view.launchDe(ModelDe.lancerDeEvenement(), model.actualDe, "Lancer le dé");
+                }
             }
         } else if (!view.stage.getScene().equals(event.getSource())) {
             ImageView carte = (ImageView) event.getSource();
@@ -107,6 +110,7 @@ public class Control_Game implements EventHandler<MouseEvent> {
             else view.showImage((ImageView) event.getSource(), 0);
         }
     }
+
 
     private void timer() {
         if(model.deLance)
