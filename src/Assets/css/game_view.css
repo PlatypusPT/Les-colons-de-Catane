@@ -54,7 +54,27 @@
     -fx-progress-color: rgb(255, 255, 255);
     -fx-font-weight: 700;
 }
-
-.huge-focus {
-    -fx-border-color: rgb(255, 0, 0);
+#nothing-to-show {
+   -fx-text-fill: white;
+}
+#switch-turn {
+  -fx-background-color: rgb(132,28,32);
+  -fx-text-fill: rgb(245,204,34);
+}
+#switch-turn:hover {
+  -fx-background-color: rgb(120,25,28);
+}
+#popup-button {
+  -fx-background-color: rgb(132,28,32);
+  -fx-text-fill: rgb(245,204,34);
+}
+#popup-button:hover {
+  -fx-background-color: rgb(120,25,28);
+}
+#close-button {
+  -fx-background-color: rgb(132,28,32);
+  -fx-text-fill: rgb(245,204,34);
+}
+#close-button:hover {
+  -fx-background-color: rgb(120,25,28);
 }
