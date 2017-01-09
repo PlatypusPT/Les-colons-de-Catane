@@ -43,6 +43,15 @@ public class Control_Game implements EventHandler<MouseEvent> {
                 if (model.turn == 0) view.setFirstPlayerView(0);
                 else view.setSecondPlayerView(0);
             } else view.showCards(model.actualPioche);
+        } else if (view.endTurn.equals(event.getSource())) {
+            model.turn = (model.turn+1)%2;
+            if(model.turn==0) {
+                if(model.firstTurn) model.firstTurn=false;
+                view.setFirstPlayerView(0);
+            }
+            else {
+                view.setSecondPlayerView(model.firstTurn?1:0);
+            }
         } else if ((event.getPickResult().getIntersectedNode() instanceof Text &&
                 view.launchDe.getText().equals(((Text) event.getPickResult().getIntersectedNode()).getText()))
                 || view.launchDe.equals(event.getSource())) {

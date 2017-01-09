@@ -266,9 +266,8 @@ public class Game_View {
         ((BorderPane) stage.getScene().getRoot()).setCenter(gameSection);
         BorderPane bp = new BorderPane();
         bp.setCenter(firstPlayerDeckLayout);
-        if(mode==0){
-            bp.setRight(close);
-        }
+        if(mode==0)
+            bp.setRight(endTurn);
         ((BorderPane) stage.getScene().getRoot()).setBottom(bp);
 
         stage.getScene().getRoot().setVisible(true);
@@ -302,8 +301,12 @@ public class Game_View {
         gameSection.getChildren().add(firstPlayerPlayedCardsLayout);
         gameSection.getChildren().add(piocheLayout);
         gameSection.getChildren().add(secondPlayerPlayedCardsLayout);
-        gameSection.getChildren().add(secondPlayerDeckLayout);
         ((BorderPane) stage.getScene().getRoot()).setCenter(gameSection);
+        BorderPane bp = new BorderPane();
+        bp.setCenter(secondPlayerDeckLayout);
+        if(mode==0)
+            bp.setRight(endTurn);
+        ((BorderPane) stage.getScene().getRoot()).setBottom(bp);
 
         stage.getScene().getRoot().setVisible(true);
     }
@@ -404,6 +407,7 @@ public class Game_View {
         launchDe.setOnMouseClicked(eh);
         stage.getScene().setOnMouseClicked(eh);
         actionImageFocus.setOnMouseClicked(eh);
+        endTurn.setOnMouseClicked(eh);
     }
 
     public void turnCardsAfterDice(int turn) {
