@@ -1,7 +1,22 @@
-#second-player-layout,#first-player-layout, #pioche-layout {
+#second-player-layout-in,#first-player-layout-in, #pioche-layout {
     -fx-padding: 1em;
     -fx-hgap: 0.3em;
     -fx-vgap: 0.3em;
+}
+#second-player-layout,#first-player-layout {
+    -fx-hgap: 2em;
+}
+#second-player-blason,#first-player-blason {
+    -fx-alignment: center-right;
+    -fx-pref-width: 200;
+}
+.nom-joueur {
+    -fx-padding: 1em;
+    -fx-font-size: 1.6em;
+    -fx-text-fill: white;
+}
+#second-player-layout>*,#first-player-layout>* {
+    -fx-alignment: center;
 }
 
 #plateau-layout > * {

@@ -51,7 +51,7 @@ public class Menu_View{
     }
 
     private void firstTimeInitAttribute() {
-        stage.setTitle("Les princes de Catane");
+        stage.setTitle("Les colons de Catane");
         stage.getIcons().add(new Image(new File(ModelMenu.ASSETS_PATH +"/img/icon.png").toURI().toString()));
         stage.centerOnScreen();
         stage.setResizable(false);

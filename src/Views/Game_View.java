@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -76,13 +77,13 @@ public class Game_View {
         gameSection.setId("plateau-layout");
 
         firstPlayerPlayedCardsLayout = new GridPane();
-        firstPlayerPlayedCardsLayout.setId("first-player-layout");
+        firstPlayerPlayedCardsLayout.setId("first-player-layout-in");
         firstPlayerDeckLayout = new GridPane();
         firstPlayerDeckLayout.setId("first-player-deck");
         piocheLayout = new GridPane();
         piocheLayout.setId("pioche-layout");
         secondPlayerPlayedCardsLayout = new GridPane();
-        secondPlayerPlayedCardsLayout.setId("second-player-layout");
+        secondPlayerPlayedCardsLayout.setId("second-player-layout-in");
         secondPlayerDeckLayout = new GridPane();
         secondPlayerDeckLayout.setId("second-player-deck");
         IMGButtonGroup = new GridPane();
@@ -278,9 +279,37 @@ public class Game_View {
         }
 
         // Game content
-        gameSection.getChildren().add(secondPlayerPlayedCardsLayout);
+        BorderPane j2 = new BorderPane();
+        j2.setCenter(secondPlayerPlayedCardsLayout);
+        Label t2 = new Label(model.joueur2.getNom());
+        t2.getStyleClass().add("nom-joueur");
+        j2.setLeft(new VBox(
+                t2,
+                new ImageView(new Image(
+                        new File(ModelMenu.ASSETS_PATH+"/img/blasons/"+Joueur.COULEURS[model.joueur2.getCouleurBlason()]+"_shield.png").toURI().toString(),
+                        IMG_MEDIUM_SIZE/1.6,IMG_MEDIUM_SIZE/1.6,
+                        true,true
+                ))
+        ));
+        j2.setId("second-player-layout");
+        j2.getChildren().get(1).setId("second-player-blason");
+        BorderPane j1 = new BorderPane();
+        j1.setCenter(firstPlayerPlayedCardsLayout);
+        Label t1 = new Label(model.joueur1.getNom());
+        t1.getStyleClass().add("nom-joueur");
+        j1.setLeft(new VBox(
+                t1,
+                new ImageView(new Image(
+                        new File(ModelMenu.ASSETS_PATH+"/img/blasons/"+Joueur.COULEURS[model.joueur1.getCouleurBlason()]+"_shield.png").toURI().toString(),
+                        IMG_MEDIUM_SIZE/1.6,IMG_MEDIUM_SIZE/1.6,
+                        true,true
+                ))
+        ));
+        j1.setId("first-player-layout");
+        j1.getChildren().get(1).setId("first-player-blason");
+        gameSection.getChildren().add(j2);
         gameSection.getChildren().add(piocheLayout);
-        gameSection.getChildren().add(firstPlayerPlayedCardsLayout);
+        gameSection.getChildren().add(j1);
         ((BorderPane) stage.getScene().getRoot()).setCenter(gameSection);
         BorderPane bp = new BorderPane();
         bp.setCenter(firstPlayerDeckLayout);
@@ -327,9 +356,37 @@ public class Game_View {
 
 
         // Game content
-        gameSection.getChildren().add(firstPlayerPlayedCardsLayout);
+        BorderPane j2 = new BorderPane();
+        j2.setCenter(secondPlayerPlayedCardsLayout);
+        Label t2 = new Label(model.joueur2.getNom());
+        t2.getStyleClass().add("nom-joueur");
+        j2.setLeft(new VBox(
+                t2,
+                new ImageView(new Image(
+                        new File(ModelMenu.ASSETS_PATH+"/img/blasons/"+Joueur.COULEURS[model.joueur2.getCouleurBlason()]+"_shield.png").toURI().toString(),
+                        IMG_MEDIUM_SIZE/1.6,IMG_MEDIUM_SIZE/1.6,
+                        true,true
+                ))
+        ));
+        j2.setId("second-player-layout");
+        j2.getChildren().get(1).setId("second-player-blason");
+        BorderPane j1 = new BorderPane();
+        j1.setCenter(firstPlayerPlayedCardsLayout);
+        Label t1 = new Label(model.joueur1.getNom());
+        t1.getStyleClass().add("nom-joueur");
+        j1.setLeft(new VBox(
+                t1,
+                new ImageView(new Image(
+                        new File(ModelMenu.ASSETS_PATH+"/img/blasons/"+Joueur.COULEURS[model.joueur1.getCouleurBlason()]+"_shield.png").toURI().toString(),
+                        IMG_MEDIUM_SIZE/1.6,IMG_MEDIUM_SIZE/1.6,
+                        true,true
+                ))
+        ));
+        j1.setId("first-player-layout");
+        j1.getChildren().get(1).setId("first-player-blason");
+        gameSection.getChildren().add(j1);
         gameSection.getChildren().add(piocheLayout);
-        gameSection.getChildren().add(secondPlayerPlayedCardsLayout);
+        gameSection.getChildren().add(j2);
         ((BorderPane) stage.getScene().getRoot()).setCenter(gameSection);
         BorderPane bp = new BorderPane();
         bp.setCenter(secondPlayerDeckLayout);

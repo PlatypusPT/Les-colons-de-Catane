@@ -99,10 +99,11 @@ public class Control_Game implements EventHandler<MouseEvent> {
                 for (int i = 0; i < model.getTasDeveloppement(model.actualPioche).size(); i++)
                     if (model.getTasDeveloppement(model.actualPioche).get(i).equals(view.allCards.get(view.onFocusIMG))) {
                         for (Map.Entry<ImageView, Carte> e : view.allCards.entrySet())
-                            if (e.getValue().equals(model.getTasDeveloppement(model.actualPioche).get(i)))
+                            if (e.getValue().equals(model.getTasDeveloppement(model.actualPioche).get(i))) {
                                 if (model.turn == 0)
                                     view.firstPlayerDeck.put(new Point(view.firstPlayerDeck.size(), 0), e.getKey());
                                 else view.secondPlayerDeck.put(new Point(view.secondPlayerDeck.size(), 0), e.getKey());
+                        }
                         j.main.add(model.getTasDeveloppement(model.actualPioche).remove(i));
                     }
                 if (j.main.size() < 3) {

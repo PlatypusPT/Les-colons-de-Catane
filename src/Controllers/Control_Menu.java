@@ -40,6 +40,7 @@ public class Control_Menu implements EventHandler<ActionEvent>{
             if(view.blasonsIMGJ.get(0).isSelected()) view.blasonsIMGJ.get(1).setSelected(true);
             else view.blasonsIMGJ.get(0).setSelected(true);
             view.blasonsIMGJ.get(c1).setDisable(true);
+            view.jnomTextField.clear();
             view.setWidgetAskSecondPlayer();
         }
 
