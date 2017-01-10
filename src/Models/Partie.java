@@ -271,7 +271,7 @@ public class Partie {
 
     public void addRessources(int actualDeResult) {
         for (Carte c : turn == 0 ? joueur1.principaute : joueur2.principaute)
-            if (c instanceof Terrain) if (((Terrain) c).getNbRessource() < 3)
+            if (c instanceof Terrain) if (((Terrain) c).getNbRessource() < 3 && ((Terrain) c).getFaceDé()==actualDeResult+1)
                 ((Terrain) c).setNbRessource(((Terrain) c).getNbRessource() + 1);
     }
 }

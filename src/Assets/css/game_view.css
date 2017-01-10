@@ -85,7 +85,7 @@
   -fx-background-color: rgb(120,25,28);
 }
 .huge-focus {
-    -fx-border-color: rgb(255, 0, 0);
+    -fx-effect: dropshadow(gaussian, #ff1100, 7, 0.6, 0, 0);
 }
 #button-group {
   -fx-alignment: top-center;

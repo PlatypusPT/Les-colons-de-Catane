@@ -1,7 +1,9 @@
 package Views;
 
 import Models.*;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -14,8 +16,10 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
 
 /**
  * Created by yhaffner on 08/12/16
@@ -32,18 +36,18 @@ public class Game_View {
     private Menu_View menu_view;
 
     private VBox gameSection;
-    private GridPane firstPlayerPlayedCardsLayout;
+    public GridPane firstPlayerPlayedCardsLayout;
     private GridPane piocheLayout;
-    private GridPane secondPlayerPlayedCardsLayout;
-    private GridPane secondPlayerDeckLayout;
-    private GridPane firstPlayerDeckLayout;
+    public GridPane secondPlayerPlayedCardsLayout;
+    public GridPane secondPlayerDeckLayout;
+    public GridPane firstPlayerDeckLayout;
     private GridPane IMGButtonGroup;
 
     public BorderPane popup;
     public HashMap<Point,ImageView> firstPlayerPlayedCards;
     public HashMap<Point,ImageView> firstPlayerDeck;
     public HashMap<Point,ImageView> piocheCards;
-    private HashMap<Point,ImageView> secondPlayerPlayedCards;
+    public HashMap<Point,ImageView> secondPlayerPlayedCards;
     public HashMap<Point,ImageView> secondPlayerDeck;
     public HashMap<ImageView, Carte> allCards;
 
@@ -240,8 +244,6 @@ public class Game_View {
     }
 
     public void setFirstPlayerView(int mode){
-        higlightDevelopmentColoniesCase(mode==2);
-        higlightDevelopmentVilleCase(mode==3);
         stage.getScene().getRoot().setVisible(false);
 
         ((BorderPane) stage.getScene().getRoot()).getChildren().clear();
@@ -262,6 +264,18 @@ public class Game_View {
             secondPlayerPlayedCardsLayout.add(e.getValue(),e.getKey().x,e.getKey().y);
         for(Map.Entry<Point, ImageView> e : secondPlayerDeck.entrySet())
             secondPlayerDeckLayout.add(e.getValue(),e.getKey().x,e.getKey().y);
+
+        for(int i=0;i<firstPlayerPlayedCardsLayout.getChildren().size();i++) {
+            firstPlayerPlayedCardsLayout.getChildren().get(i).getStyleClass().remove(HUGE_FOCUS);
+            if (empty_card.equals(((ImageView) firstPlayerPlayedCardsLayout.getChildren().get(i)).getImage()) && firstPlayerPlayedCardsLayout.getRowIndex(firstPlayerPlayedCardsLayout.getChildren().get(i)) != 1) {
+                System.out.println("x:" + firstPlayerPlayedCardsLayout.getColumnIndex(firstPlayerPlayedCardsLayout.getChildren().get(i)) + " y:" + firstPlayerPlayedCardsLayout.getRowIndex(firstPlayerPlayedCardsLayout.getChildren().get(i)));
+                for (Map.Entry<Point, ImageView> e : (model.turn == 0 ? firstPlayerPlayedCards.entrySet() : secondPlayerPlayedCards.entrySet()))
+                    if (e.getKey().x == firstPlayerPlayedCardsLayout.getColumnIndex(firstPlayerPlayedCardsLayout.getChildren().get(i))  && e.getKey().y == 1)
+                        if((mode == 2 && allCards.get(e.getValue()) instanceof Colonie)||
+                                (mode == 3 && allCards.get(e.getValue()) instanceof Ville))
+                            firstPlayerPlayedCardsLayout.getChildren().get(i).getStyleClass().add(HUGE_FOCUS);
+            }
+        }
 
         // Game content
         gameSection.getChildren().add(secondPlayerPlayedCardsLayout);
@@ -278,8 +292,6 @@ public class Game_View {
     }
 
     public void setSecondPlayerView(int mode){
-        higlightDevelopmentColoniesCase(mode==2);
-        higlightDevelopmentVilleCase(mode==3);
         stage.getScene().getRoot().setVisible(false);
 
         ((BorderPane) stage.getScene().getRoot()).getChildren().clear();
@@ -301,6 +313,17 @@ public class Game_View {
         for(Map.Entry<Point, ImageView> e : secondPlayerDeck.entrySet())
             secondPlayerDeckLayout.add(e.getValue(),e.getKey().x,e.getKey().y);
 
+        for(int i=0;i<secondPlayerPlayedCardsLayout.getChildren().size();i++) {
+            secondPlayerPlayedCardsLayout.getChildren().get(i).getStyleClass().remove(HUGE_FOCUS);
+            if (empty_card.equals(((ImageView) secondPlayerPlayedCardsLayout.getChildren().get(i)).getImage()) && secondPlayerPlayedCardsLayout.getRowIndex(secondPlayerPlayedCardsLayout.getChildren().get(i)) != 1) {
+                System.out.println("x:" + secondPlayerPlayedCardsLayout.getColumnIndex(secondPlayerPlayedCardsLayout.getChildren().get(i)) + " y:" + secondPlayerPlayedCardsLayout.getRowIndex(secondPlayerPlayedCardsLayout.getChildren().get(i)));
+                for (Map.Entry<Point, ImageView> e : (model.turn == 0 ? secondPlayerPlayedCards.entrySet() : secondPlayerPlayedCards.entrySet()))
+                    if (e.getKey().x == secondPlayerPlayedCardsLayout.getColumnIndex(secondPlayerPlayedCardsLayout.getChildren().get(i))  && e.getKey().y == 1)
+                        if((mode == 2 && allCards.get(e.getValue()) instanceof Colonie)||
+                                (mode == 3 && allCards.get(e.getValue()) instanceof Ville))
+                            secondPlayerPlayedCardsLayout.getChildren().get(i).getStyleClass().add(HUGE_FOCUS);
+            }
+        }
 
 
         // Game content
@@ -438,6 +461,16 @@ public class Game_View {
         stage.getScene().setOnMouseClicked(eh);
         actionImageFocus.setOnMouseClicked(eh);
         endTurn.setOnMouseClicked(eh);
+        for(Map.Entry<Point, ImageView> e : firstPlayerPlayedCards.entrySet())
+            if(e.getKey().x%2==1 && e.getKey().y!=1) {
+                e.getValue().setOnMouseClicked(eh);
+                e.getValue().getStyleClass().add("selectable");
+            }
+        for(Map.Entry<Point, ImageView> e : secondPlayerPlayedCards.entrySet())
+            if(e.getKey().x%2==1 && e.getKey().y!=1) {
+                e.getValue().setOnMouseClicked(eh);
+                e.getValue().getStyleClass().add("selectable");
+            }
     }
 
     public void turnCardsAfterDice(int turn) {
@@ -450,23 +483,5 @@ public class Game_View {
                     i.setRotate(i.getRotate() - 90);
             }
         }
-    }
-    private void higlightDevelopmentVilleCase(boolean highlight) {
-        for(Map.Entry<Point,ImageView> e:(model.turn==0?firstPlayerPlayedCards.entrySet():secondPlayerPlayedCards.entrySet()))
-            if(e.getKey().x%2==1 && e.getKey().y%2==0) {
-                for (Map.Entry<Point, ImageView> e2 : (model.turn == 0 ? firstPlayerPlayedCards.entrySet() : secondPlayerPlayedCards.entrySet()))
-                    if (highlight && e2.getKey().y == 1 && e2.getKey().x == e.getKey().x && allCards.get(e2.getValue()) instanceof Ville)
-                        e.getValue().getStyleClass().add(HUGE_FOCUS);
-                    else e.getValue().getStyleClass().remove(HUGE_FOCUS);
-            }
-    }
-    private void higlightDevelopmentColoniesCase(boolean highlight) {
-        for(Map.Entry<Point,ImageView> e:(model.turn==0?firstPlayerPlayedCards.entrySet():secondPlayerPlayedCards.entrySet()))
-            if(e.getKey().x%2==1 && e.getKey().y%2==0) {
-                for (Map.Entry<Point, ImageView> e2 : (model.turn == 0 ? firstPlayerPlayedCards.entrySet() : secondPlayerPlayedCards.entrySet()))
-                    if (highlight && e2.getKey().y == 1 && e2.getKey().x == e.getKey().x && allCards.get(e2.getValue()) instanceof Colonie)
-                        e.getValue().getStyleClass().add(HUGE_FOCUS);
-                    else e.getValue().getStyleClass().remove(HUGE_FOCUS);
-            }
     }
 }
