@@ -8,8 +8,12 @@ import org.junit.Test;
  * Created by alex on 22/11/16.
  */
 public class TerrainUnitTest {
+    Terrain terrain;
 
-    Terrain terrain = new Terrain("Blé", 1, 1, null);
+    @Before
+    public void init() {
+        terrain = new Terrain("Blé", 1, 1, null);
+    }
 
     @Test
     public void construireUnTerraintUnitTest(){
