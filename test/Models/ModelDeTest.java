@@ -8,19 +8,19 @@ public class ModelDeTest {
 
     @Test
     public void testDeComprisEntreUnEtSix() {
+        ModelDe md = new ModelDe();
         for (int i=0;i<100;i++) {
             int de = ModelDe.lancerDeProduction();
             Assert.assertTrue(de <= 5 && de >= 0);
         }
     }
 
-    // TEST OBSOLETE A REFAIRE?
-    /*@Test
-    public void testActionNonVide() {
+    @Test
+    public void testDeComprisEntreUnEtSixEvent() {
         ModelDe md = new ModelDe();
         for (int i=0;i<100;i++) {
-            //String action = ModelDe.lancerDeEvenement();
-            //Assert.assertTrue(!action.equals(""));
+            int de = ModelDe.lancerDeEvenement();
+            Assert.assertTrue(de <= 5 && de >= 0);
         }
-    }*/
+    }
 }
