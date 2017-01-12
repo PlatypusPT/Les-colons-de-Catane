@@ -1,68 +1,66 @@
-package Controller;
+package Controllers;
 
-
-import Model.Joueur;
-import Model.Partie;
-import View.Menu_View;
+import Models.Joueur;
+import Models.ModelMenu;
+import Models.Partie;
+import Views.Menu_View;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.RadioButton;
 
 /**
  * Created by yhaffner on 21/11/16.
  */
-public class Control_Menu implements EventHandler<MouseEvent>
+public class Control_Menu implements EventHandler<ActionEvent>
 {
-    private Menu_View view;
+    protected Menu_View view;
+    private ModelMenu model;
 
-    public Control_Menu(Menu_View menu)
+    private String j1, j2;
+    private int c1, c2;
+
+    public Control_Menu(ModelMenu model, Menu_View view)
     {
-        this.view = menu;
-        this.view.setController(this);
-
-        // En attendant un menu fonctionnel, pour passer direct au jeu:
-        // Partie p = new Partie();
-        // p.ajouterJoueur(new Joueur("Pierre",0));
-        // p.ajouterJoueur(new Joueur("Gérard",1));
-        // new Control_Game(p,this);
-        // fin truc inutile
+        this.model = model;
+        this.view = view;
+        view.setController(this);
     }
 
     @Override
-    // TODO ULTRA IMPORTANT
-    public void handle(MouseEvent event)
+    public void handle(ActionEvent event)
     {
-        /*
-        Réception des objets du genre:
+        int i = 0;
+        System.out.println("Button clicked: " + event.getSource());
 
-        si(event.getSource().equals(view.bouton){
-            traiter...
-            ex: view.setOptionsView();
-        }
-        */
+        if (view.startButton.equals(event.getSource())) view.setWidgetAskFirstPlayer();
 
-        if (event.getSource().equals(getView().startButton))
+        if (view.continueButton.equals(event.getSource()))
         {
-            view.setMainMenuView();
+            if (view.jnomTextField.getText().replaceAll(" ", "").length() == 0) j1 = "J1";
+            else j1 = view.jnomTextField.getText();
+            for (RadioButton rb : view.blasonsIMGJ)
+                if (rb.isSelected()) c1 = i;
+                else i++;
+            if (view.blasonsIMGJ.get(0).isSelected()) view.blasonsIMGJ.get(1).setSelected(true);
+            else view.blasonsIMGJ.get(0).setSelected(true);
+            view.blasonsIMGJ.get(c1).setDisable(true);
+            view.jnomTextField.clear();
+            view.setWidgetAskSecondPlayer();
         }
 
-        if (event.getSource().equals(getView().nouvellePartie))
+        if (view.realStartButton.equals(event.getSource()))
         {
-            Partie p = new Partie();
-            p.ajouterJoueur(new Joueur("Pierre",0));
-            p.ajouterJoueur(new Joueur("Gérard",1));
-            new Control_Game(p,this);
-        }
-/*
-        pour le début de partie, il faudra juste créer ça:
-                Partie p = new Partie();
-                ajouter à p les joueurs
-                new Control_Game(p,this);
-       c tout!
-         */
-    }
+            if (view.jnomTextField.getText().replaceAll(" ", "").length() == 0) j2 = "J2";
+            else j2 = view.jnomTextField.getText();
+            for (RadioButton rb : view.blasonsIMGJ)
+                if (rb.isSelected()) c2 = i;
+                else i++;
 
-    public Menu_View getView()
-    {
-        return view;
+            //game_view=new Game_View(new Partie(new Joueur(j1,c1),new Joueur(j2,c2)),view.stage,this);
+            Control_Game control_game = new Control_Game(
+                    new Partie(new Joueur(j1, c1), new Joueur(j2, c2)),
+                    this
+            );
+        }
     }
 }
